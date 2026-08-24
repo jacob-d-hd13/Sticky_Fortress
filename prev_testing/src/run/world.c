@@ -84,9 +84,9 @@ void create_dwarves(world *wrl, world_params_data_lord *world_params_data, prog_
         char *dwarf_game_id = malloc(prog_params_data->text_buffer_size);
         sprintf(dwarf_game_id, "%d", x);
 
-        dwarf dw = {dwarf_game_id, "Dwarf", true, true, draw_data->default_human_char, dw_x, dw_y, UNTARGET_MOVING, -1, 0, 0, 0, 50 + rand () % 1000 + rand () % 50, 0, RED};
-        //                              dwarvenness  is                                                      target target hunger die level sleepiness
-        //                                           alive                                                  food id   cell coords    hunger   
+        dwarf dw = {dwarf_game_id, "Dwarf", true, true, draw_data->default_human_char, dw_x, dw_y, UNTARGET_MOVING, -1, 0, 0, 500, 50 + rand () % 1000 + rand () % 50, 0, RED};
+        //                              dwarvenness  is                                                      target target  hunger          die level            sleepiness
+        //                                           alive                                                  food id   cell coords           hunger   
 
         if (x > 0 && x < world_params_data->start_dwarves_number - 1) {
 
@@ -121,7 +121,7 @@ void create_world_food(world *wrl, world_params_data_lord *world_params_data, dr
             res_y = rand() % wrl->map_size.y;
         }
 
-    item f = {res_x, res_y, FOOD, draw_data->default_food_char, 50 + rand() % 30, true};
+    item f = {res_x, res_y, FOOD, draw_data->default_food_char, 1, true}; //50 + rand() % 30
 
         wrl->items[x] = f;
     }
@@ -183,12 +183,12 @@ void delete_world(world *wrl, world_params_data_lord *world_params_data, log_dat
 
 world *initialize_world(world_params_data_lord *world_params_data, prog_params_data_lord *prog_params_data, char *logs_barriers, coord map_size, log_data_lord *log_data, draw_data_lord *draw_data)
 {
-    world *wrl = malloc(sizeof(world));
+    world *wrl = calloc(1, sizeof(world));
     wrl->world_name = world_params_data->default_name;
     wrl->map_size = map_size;
-    wrl->map = malloc(sizeof(landscape_cell) * (wrl->map_size.x * wrl->map_size.y)); // Creating map
+    wrl->map = calloc((wrl->map_size.x * wrl->map_size.y), sizeof(landscape_cell)); // Creating map
 
-    wrl->world_landscapes = malloc(sizeof(landscape_type)*10);
+    wrl->world_landscapes = calloc(10, sizeof(landscape_type));
     initialize_world_landscapes(wrl);
 
     initialize_world_file(wrl, prog_params_data, world_params_data);
@@ -199,16 +199,13 @@ world *initialize_world(world_params_data_lord *world_params_data, prog_params_d
 
     generate_world_structures(wrl, world_params_data);
 
-    log_to_file(log_data, "Путукфеув ыекгсегкуы\n");
-    raw_log_to_file(log_data, logs_barriers);
-
-    wrl->dwarves = malloc(sizeof(dwarf) * (world_params_data->start_dwarves_number * 1.5)); // Creating dwarves
+    wrl->dwarves = calloc(world_params_data->start_dwarves_number * 1.5, sizeof(dwarf)); // Creating dwarves
 
     create_dwarves(wrl, world_params_data, prog_params_data, log_data, draw_data);
 
     raw_log_to_file(log_data, logs_barriers);
 
-    wrl->items = malloc(sizeof(landscape_cell) * (world_params_data->start_food_on_map + 5)); // Creating items
+    wrl->items = calloc(world_params_data->start_food_on_map + 5, sizeof(landscape_cell)); // Creating items
 
     create_world_food(wrl, world_params_data, draw_data);
 

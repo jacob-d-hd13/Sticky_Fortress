@@ -115,12 +115,9 @@ int main()
             }
         }
 
-        for (int x = 0; x < world_params_data->start_food_on_map; x++) // Draw items
+        for (int x = 0; x < world_params_data->food_exists; x++) // Draw items
         {
-            if (wrl->items[x].number > 0)
-            {
-                draw_item(wrl->items[x], prog_params_data);
-            }
+            draw_item(wrl->items[x], prog_params_data);
         }
 
         for (int x = 0; x < world_params_data->start_dwarves_number; x++) // Draw dwarves

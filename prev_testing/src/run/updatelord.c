@@ -24,6 +24,14 @@ void update_game_running_params(prog_params_data_lord *prog_params_data, log_dat
     }
 }
 
+void delete_item(world *wrl, int id, world_params_data_lord *world_params_data) {
+    for (int c = id - 1; c < world_params_data->food_exists - 1; c++) {
+            wrl->items[c] = wrl->items[c+1];
+    }
+
+    // Need to cut array size
+}
+
 void update_game_objects(world *wrl, prog_params_data_lord *prog_params_data, world_params_data_lord *world_params_data, log_data_lord *log_data) { // Dwarves, items...
     for (int x = 0; x < world_params_data->start_dwarves_number; x++) // Update dwarves
     {
@@ -40,7 +48,8 @@ void update_game_objects(world *wrl, prog_params_data_lord *prog_params_data, wo
         for (int u = 0; u < world_params_data->start_food_on_map; u ++) {
             if (wrl->items[u].number <= 0) {
                 world_params_data->food_exists --;
-                wrl->items[u].is_exist = false; // <-- This need to replace with removal from array
+                wrl->items[u].is_exist = false;
+                delete_item(wrl, u, world_params_data);
             }
 
             if ((rand() % 500) == 1) {
@@ -100,7 +109,7 @@ void update_game_stats(world *wrl, world_params_data_lord *world_params_data) {
 }
 
 void update_selection(world *wrl, world_params_data_lord *world_params_data, prog_params_data_lord *prog_params_data) {
-    if (IsMouseButtonDown(MOUSE_LEFT_BUTTON)) // Selecting cells | In update lord
+    if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
     {
         if (prog_params_data->square_selecting_freeze == 0) 
         {

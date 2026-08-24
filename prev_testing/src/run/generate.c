@@ -13,75 +13,78 @@ bool structures_overlay_check(world *wrl, landscape_structure structure, coord z
 
 void generate_structure(world *wrl)
 {
-    landscape_structure structure;
+    // landscape_structure structure;
 
-    float pond = rand() % 100 + rand() % 15;
-    float pond_increment_step = 1 + rand () % 3;
-    int pond_border = 200 + rand() % 100;
+    // float pond = rand() % 100 + rand() % 15; // Randomization parameters
+    // float pond_increment_step = 1 + rand () % 3;
+    // int pond_border = 200 + rand() % 100;
 
-    if (rand() % 10 > 5)
-    {
-        structure.landscape = wrl->world_landscapes[1];
-        structure.second_landscape = wrl->world_landscapes[2];
-    }
-    else
-    {
-        structure.landscape = wrl->world_landscapes[3];
-        structure.second_landscape = wrl->world_landscapes[4];
-    }
+    // if (rand() % 10 > 5) // Landscapes choice
+    // {
+    //     structure.landscape = wrl->world_landscapes[1];
+    //     structure.second_landscape = wrl->world_landscapes[2];
+    // }
+    // else
+    // {
+    //     structure.landscape = wrl->world_landscapes[3];
+    //     structure.second_landscape = wrl->world_landscapes[4];
+    // }
 
-    coord zone_start_coord = (coord){rand() % wrl->map_size.x, rand() % wrl->map_size.y};
+    // coord zone_start_coord = (coord){rand() % wrl->map_size.x, rand() % wrl->map_size.y};
 
-    int zone_max_long_x = 3 + rand() % 20;
-    int zone_max_long_y = 3 + rand() % 10;
+    // int zone_max_long_x = 25 + (wrl->map_size.x / (1 + rand() % 25)); // Size of structure
+    // int zone_max_long_y = 25 + (wrl->map_size.y / (1 + rand() % 25));
 
-    int j = 0;
+    // printf("SIZE: %d, %d\n", zone_max_long_x, zone_max_long_y);
 
-    while (!((zone_start_coord.x + zone_max_long_x) < wrl->map_size.x && (zone_start_coord.y + zone_max_long_y) < wrl->map_size.y))
-    {
-        zone_start_coord.x = 2 + rand() % 5;
-        zone_start_coord.y = 2 + rand() % 5;
-    }
+    // int j = 0;
 
-    for (int l = 0; l < zone_max_long_x; l++)
-    {
-        for (int g = 0; g < zone_max_long_y; g++)
-        {
-            if (!(structure.landscape.game_id == LAND_MOUNTAINS)) // Water
-            {
-                if (structures_overlay_check(wrl, structure, zone_start_coord, zone_max_long_x, zone_max_long_y, l, g)) {
-                    return;
-                }
+    // while ((zone_start_coord.x + zone_max_long_x) > wrl->map_size.x && (zone_start_coord.y + zone_max_long_y) > wrl->map_size.y) // Coords of structure
+    // {
+    //     zone_start_coord.x = abs((wrl->map_size.x - zone_max_long_x) - (1 + rand() % 10));
+    //     zone_start_coord.y = abs((wrl->map_size.y - zone_max_long_y) - (1 + rand() % 10));
+    //     printf("x:%d y:%d\n", zone_start_coord.x, zone_start_coord.y);
+    // }
 
-                if ((zone_max_long_y/2) + (rand() % pond_border)/2 >= pond) {
-                    wrl->map[cell_id_in_map((zone_start_coord.x + l), (zone_start_coord.y + g), wrl->map_size.x)].land_type = structure.second_landscape;
-                } else {
-                    wrl->map[cell_id_in_map((zone_start_coord.x + l), (zone_start_coord.y + g), wrl->map_size.x)].land_type = structure.landscape;
-                } // So ugly generation
+    // for (int l = 0; l < zone_max_long_x; l++) // Generation
+    // {
+    //     for (int g = 0; g < zone_max_long_y; g++)
+    //     {
+    //         if (!(structure.landscape.game_id == LAND_MOUNTAINS)) // Water
+    //         {
+    //             if (structures_overlay_check(wrl, structure, zone_start_coord, zone_max_long_x, zone_max_long_y, l, g)) {
+    //                 return;
+    //             }
+
+    //             if ((zone_max_long_y/2) + (rand() % pond_border)/2 >= pond) {
+    //                 wrl->map[cell_id_in_map((zone_start_coord.x + l), (zone_start_coord.y + g), wrl->map_size.x)].land_type = structure.second_landscape;
+    //             } else {
+    //                 wrl->map[cell_id_in_map((zone_start_coord.x + l), (zone_start_coord.y + g), wrl->map_size.x)].land_type = structure.landscape;
+    //             } // So ugly generation
                 
-                j++;
-            }
-            else // Mountains
-            {
-                if (((rand() % pond_border) - 20) > pond)
-                {
-                    if (structures_overlay_check(wrl, structure, zone_start_coord, zone_max_long_x, zone_max_long_y, l, g)) {
-                        return;
-                    }
+    //             j++;
+    //         }
+    //         else // Mountains
+    //         {
+    //             if (((rand() % pond_border) - 20) > pond)
+    //             {
+    //                 if (structures_overlay_check(wrl, structure, zone_start_coord, zone_max_long_x, zone_max_long_y, l, g)) {
+    //                     return;
+    //                 }
 
-                    if (((rand() % pond_border + pond/2))/2 >= pond) {
-                        wrl->map[cell_id_in_map((zone_start_coord.x + l), (zone_start_coord.y + g), wrl->map_size.x)].land_type = structure.second_landscape;
-                    } else {
-                        wrl->map[cell_id_in_map((zone_start_coord.x + l), (zone_start_coord.y + g), wrl->map_size.x)].land_type = structure.landscape;
-                    }
+    //                 if (((rand() % pond_border + pond/2))/2 >= pond) {
+    //                     wrl->map[cell_id_in_map((zone_start_coord.x + l), (zone_start_coord.y + g), wrl->map_size.x)].land_type = structure.second_landscape;
+    //                 } else {
+    //                     wrl->map[cell_id_in_map((zone_start_coord.x + l), (zone_start_coord.y + g), wrl->map_size.x)].land_type = structure.landscape;
+    //                 }
 
-                    j++;
-                }
-            }
+    //                 j++;
+    //             }
+    //         }
 
-            pond += pond_increment_step;
-        }
-    }
+    //         pond += pond_increment_step;
+    //     }
+    // }
 }
 
 void generate_world_structures(world *wrl, world_params_data_lord *world_params_data)

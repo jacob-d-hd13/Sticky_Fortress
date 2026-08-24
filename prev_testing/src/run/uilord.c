@@ -55,7 +55,7 @@ void update_ui_lord (ui_lord *uil, world_params_data_lord *world_params_data, pr
 
     sprintf(uil->all_gui_text[1].text, "Selected: \nbasic landscape: %d; \nwater: %d; \nmountains: %d; \nrocks: %d; deep water: %d", 
         world_params_data->cells_selected[0], world_params_data->cells_selected[1], world_params_data->cells_selected[2], world_params_data->cells_selected[3], world_params_data->cells_selected[4]);
-    sprintf(uil->all_gui_text[5].text, "You cand find world map \nin prevTesting/worlds/");
+    sprintf(uil->all_gui_text[5].text, "You can find world map \nin prev_testing/worlds/");
 
     sprintf(uil->all_gui_text[2].text, "Dwarves alive: %d / %d", world_params_data->dwarves_alive, world_params_data->start_dwarves_number);
     sprintf(uil->all_gui_text[4].text, "      selected: %d", world_params_data->dwarves_selected);
