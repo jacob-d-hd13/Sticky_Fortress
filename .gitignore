@@ -1,12 +1,12 @@
 .vscode/
 
-prevTesting/apps/*
-!prevTesting/apps/.gitkeep
+prev_testing/apps/*
+!prev_testing/apps/.gitkeep
 
-prevTesting/logs/*
-!prevTesting/logs/.gitkeep
+prev_testing/logs/*
+!prev_testing/logs/.gitkeep
 
-prevTesting/worlds/*
-!prevTesting/worlds/.gitkeep
+prev_testing/worlds/*
+!prev_testing/worlds/.gitkeep
 
 .directory

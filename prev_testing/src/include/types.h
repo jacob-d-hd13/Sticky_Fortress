@@ -121,8 +121,6 @@ typedef struct
 
 typedef struct
 {
-    coord *incoming_cells_coords;
-
     landscape_type landscape;
     landscape_type second_landscape;
 } landscape_structure;

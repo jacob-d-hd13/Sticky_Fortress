@@ -51,12 +51,12 @@ Clone of dwarf fortress on C with using Raylib - fast, clear, easy to scale.
 
 ### Common errors
 
-1) Programm compilation crashed with `Makefile` ERROR `src/run/draw.o: in function «drawGuiPannel»: draw.c:(.text+0x1e): undefined reference to DrawRectangle'` OR SIMILAR: check that you have Linux and Raylib downloaded
+1) Programm compilation crashed with `Makefile` ERROR `src/run/draw.o: in function «draw_gui_pannel»: draw.c:(.text+0x1e): undefined reference to DrawRectangle'` OR SIMILAR: check that you have Linux and Raylib downloaded
 
 ## Usage
 
 Program will start. Dwarves(green symbols `&`) randomly going around the map, and when they get hungry after a while, they go to nearest food(yellow symbols `*`) and restore their hunger.
-Press `Lmb` to start square selecting, move mouse to end square position and press `Lmb` again. For start new square selecting just click at any cell. For deselect a specific cell click `Rmb`, or
+Press `Lmb` to start square selecting, move mouse to end square position and press `Lmb` again. For start new square selecting just click at any cell. For deselect a specific cell press `Rmb`, or
 `Esc` for deselect all map. Press `space` for pause and `q` for exit from window.
 
 ## Project structure

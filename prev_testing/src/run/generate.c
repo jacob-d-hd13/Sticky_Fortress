@@ -5,7 +5,6 @@
 bool structures_overlay_check(world *wrl, landscape_structure structure, coord zone_start_coord, int zone_max_long_x, int zone_max_long_y, int l, int g) {
     if (wrl->map[cell_id_in_map((zone_start_coord.x + l), (zone_start_coord.y + g), wrl->map_size.x)].land_type.game_id != wrl->world_landscapes[0].game_id) { // Overlay check
 
-        free(structure.incoming_cells_coords);
         return true;
     }
 
@@ -36,12 +35,6 @@ void generate_structure(world *wrl)
     int zone_max_long_x = 3 + rand() % 20;
     int zone_max_long_y = 3 + rand() % 10;
 
-    printf("check_1\n");
-
-    structure.incoming_cells_coords = malloc(sizeof(landscape_cell) * zone_max_long_y * zone_max_long_y * 10); // Multiplication by 10 - CRUTCH
-
-    printf("check_2\n");
-
     int j = 0;
 
     while (!((zone_start_coord.x + zone_max_long_x) < wrl->map_size.x && (zone_start_coord.y + zone_max_long_y) < wrl->map_size.y))
@@ -56,9 +49,6 @@ void generate_structure(world *wrl)
         {
             if (!(structure.landscape.game_id == LAND_MOUNTAINS)) // Water
             {
-                structure.incoming_cells_coords[j].x = zone_start_coord.x + l;
-                structure.incoming_cells_coords[j].y = zone_start_coord.y + g;
-
                 if (structures_overlay_check(wrl, structure, zone_start_coord, zone_max_long_x, zone_max_long_y, l, g)) {
                     return;
                 }
@@ -75,9 +65,6 @@ void generate_structure(world *wrl)
             {
                 if (((rand() % pond_border) - 20) > pond)
                 {
-                    structure.incoming_cells_coords[j].x = zone_start_coord.x + l;
-                    structure.incoming_cells_coords[j].y = zone_start_coord.y + g;
-
                     if (structures_overlay_check(wrl, structure, zone_start_coord, zone_max_long_x, zone_max_long_y, l, g)) {
                         return;
                     }
@@ -101,7 +88,6 @@ void generate_world_structures(world *wrl, world_params_data_lord *world_params_
 {
     for (int x = 0; x < world_params_data->structures_number; x++)
     {
-        printf("Generating %d\n", x);
         generate_structure(wrl);
     }
 
