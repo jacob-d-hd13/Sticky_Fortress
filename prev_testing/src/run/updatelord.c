@@ -25,11 +25,27 @@ void update_game_running_params(prog_params_data_lord *prog_params_data, log_dat
 }
 
 void delete_item(world *wrl, int id, world_params_data_lord *world_params_data) {
-    for (int c = id - 1; c < world_params_data->food_exists - 1; c++) {
+    // printf("[");
+    // for (int x = 0; x < world_params_data->food_exists; x++)
+    // {
+            
+    //     printf("%d-%d ", wrl->items[x].coords.x, wrl->items[x].coords.y);
+    // }
+    // printf("]\n");
+
+    for (int c = id; c < world_params_data->food_exists - 1; c++) {
             wrl->items[c] = wrl->items[c+1];
     }
 
-    // Need to cut array size
+    world_params_data->food_exists --;
+    item *d = realloc(wrl->items, world_params_data->food_exists * sizeof(item));
+
+//     printf("[");
+//     for (int x = 0; x < world_params_data->food_exists; x++)
+//     {
+//         printf("%d-%d ", wrl->items[x].coords.x, wrl->items[x].coords.y);
+//     }
+//     printf("]\n\n");
 }
 
 void update_game_objects(world *wrl, prog_params_data_lord *prog_params_data, world_params_data_lord *world_params_data, log_data_lord *log_data) { // Dwarves, items...
@@ -45,9 +61,8 @@ void update_game_objects(world *wrl, prog_params_data_lord *prog_params_data, wo
     {
         prog_params_data->timer = 0;
         
-        for (int u = 0; u < world_params_data->start_food_on_map; u ++) {
+        for (int u = 0; u < world_params_data->food_exists; u ++) {
             if (wrl->items[u].number <= 0) {
-                world_params_data->food_exists --;
                 wrl->items[u].is_exist = false;
                 delete_item(wrl, u, world_params_data);
             }

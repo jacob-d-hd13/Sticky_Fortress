@@ -73,7 +73,7 @@ bool find_nearest_food(world *wrl, dwarf *dw, world_params_data_lord *world_para
     int min_distance = 1000;
     bool is_exist_any_food = false;
 
-    for (int z = 0; z < world_params_data->start_food_on_map; z++) // Finding nearest food
+    for (int z = 0; z < world_params_data->food_exists; z++) // Finding nearest food
     {
         if (wrl->items[z].number > 0 && (abs(dw->coords.x - wrl->items[z].coords.x) + abs(dw->coords.y - wrl->items[z].coords.y)) < min_distance)
         {
