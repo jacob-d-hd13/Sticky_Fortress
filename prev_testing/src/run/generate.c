@@ -85,6 +85,21 @@ void generate_structure(world *wrl)
     //         pond += pond_increment_step;
     //     }
     // }
+
+    landscape_structure structure;
+
+    if (rand() % 10 > 4) // Landscapes choice
+    { // Mountains have slightly larger chance that water
+        structure.landscape = wrl->world_landscapes[1];
+        structure.second_landscape = wrl->world_landscapes[2];
+    }
+    else
+    { // Water
+        structure.landscape = wrl->world_landscapes[3];
+        structure.second_landscape = wrl->world_landscapes[4];
+    }
+
+    coord zone_center_coord = (coord){ rand() % wrl->map_size.x, rand() % wrl->map_size.y}; // Center of structure generation
 }
 
 void generate_world_structures(world *wrl, world_params_data_lord *world_params_data)
