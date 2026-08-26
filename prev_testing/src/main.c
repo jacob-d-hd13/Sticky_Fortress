@@ -71,7 +71,7 @@ int main()
 
     SetExitKey(KEY_Q); // If active, window willn't close on ESC button
 
-    Image window_icon = LoadImage("./images/windowIcon.png"); // Loading icon
+    Image window_icon = LoadImage("./images/window_icon.png"); // Loading icon
     if (window_icon.format != PIXELFORMAT_UNCOMPRESSED_R8G8B8A8) // Formatting icon
     {
         ImageFormat(&window_icon, PIXELFORMAT_UNCOMPRESSED_R8G8B8A8);

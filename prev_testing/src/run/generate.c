@@ -99,7 +99,18 @@ void generate_structure(world *wrl)
         structure.second_landscape = wrl->world_landscapes[4];
     }
 
-    coord zone_center_coord = (coord){ rand() % wrl->map_size.x, rand() % wrl->map_size.y}; // Center of structure generation
+    coord zone_center_coord = (coord) {20 + rand() % (wrl->map_size.x-20), 20 + rand() % (wrl->map_size.y-20)}; // Center of structure generation
+
+    coord skeleton_x_size = (coord) {5 + rand() % 5, 5 + rand() % 5}; // Size borders of structure skeleton
+    coord skeleton_y_size = (coord) {4 + rand() % 4, 4 + rand() % 4};
+
+    for (int a = zone_center_coord.x - skeleton_x_size.x; a < zone_center_coord.x + skeleton_x_size.y; a ++) { // Generation skeleton by x
+        wrl->map[cell_id_in_map(a, zone_center_coord.y, wrl->map_size.x)].land_type = structure.landscape;
+    }
+
+    for (int b = zone_center_coord.y - skeleton_y_size.x; b < zone_center_coord.y + skeleton_y_size.y; b ++) { // Generation skeleton by y
+        wrl->map[cell_id_in_map(zone_center_coord.x, b, wrl->map_size.x)].land_type = structure.landscape;
+    }
 }
 
 void generate_world_structures(world *wrl, world_params_data_lord *world_params_data)

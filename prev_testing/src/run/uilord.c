@@ -5,7 +5,7 @@
 ui_lord *initialize_ui_lord (prog_params_data_lord *prog_params_data, int default_font_size) {
     Color ui_pannels_back = (Color) {0, 0, 0, 185};
 
-    gui_pannel mouse_info = {.start_coords.x = 0, .start_coords.y = 0, .canv_size_coords.x = 280, .canv_size_coords.y = 150, .background_color = ui_pannels_back};
+    gui_pannel mouse_info = {.start_coords.x = 0, .start_coords.y = 0, .canv_size_coords.x = 400, .canv_size_coords.y = 150, .background_color = ui_pannels_back};
 
     gui_text mouse_coords_text= {.text = (char *)malloc(prog_params_data->text_buffer_size), .start_coords.x = mouse_info.start_coords.x + 15, .start_coords.y = mouse_info.start_coords.y + 25, .font_size = default_font_size, .font_color = RED};
 
@@ -51,7 +51,7 @@ void delete_ui_lord (ui_lord *uil) {
 }
 
 void update_ui_lord (ui_lord *uil, world_params_data_lord *world_params_data, prog_params_data_lord *prog_params_data) {
-    sprintf(uil->all_gui_text[0].text, "X: %d Y: %d\nLmb to select square, \nrmb to deselect", prog_params_data->mouse_position.x, prog_params_data->mouse_position.y);
+    sprintf(uil->all_gui_text[0].text, "X: %d Y: %d\n\nLmb to start square selecting,\nrmb to deselect cell", prog_params_data->mouse_position.x, prog_params_data->mouse_position.y);
 
     sprintf(uil->all_gui_text[1].text, "Selected: \nbasic landscape: %d; \nwater: %d; \nmountains: %d; \nrocks: %d; deep water: %d", 
         world_params_data->cells_selected[0], world_params_data->cells_selected[1], world_params_data->cells_selected[2], world_params_data->cells_selected[3], world_params_data->cells_selected[4]);

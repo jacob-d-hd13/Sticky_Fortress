@@ -61,7 +61,7 @@ void restore_hunger_dwarf(world  *wrl, dwarf *dw, world_params_data_lord *world_
     {        
         wrl->items[dw->target_food_id].number--;
 
-        dw->hunger -= rand()%100 + (rand()%20) / (float)(1 + rand()%5);
+        dw->hunger -= (dw->die_level_hunger/4) + (rand()%20) / (float)(1 + rand()%5);
         if (dw->hunger < 0) {
             dw->hunger = 0;
         }
