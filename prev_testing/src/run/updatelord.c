@@ -33,19 +33,18 @@ void delete_item(world *wrl, int id, world_params_data_lord *world_params_data) 
     // }
     // printf("]\n");
 
-    for (int c = id; c < world_params_data->food_exists - 1; c++) {
+    for (int c = id; c < world_params_data->food_exists; c++) {
             wrl->items[c] = wrl->items[c+1];
     }
 
     world_params_data->food_exists --;
-    item *d = realloc(wrl->items, world_params_data->food_exists * sizeof(item));
 
-//     printf("[");
-//     for (int x = 0; x < world_params_data->food_exists; x++)
-//     {
-//         printf("%d-%d ", wrl->items[x].coords.x, wrl->items[x].coords.y);
-//     }
-//     printf("]\n\n");
+    // printf("[");
+    // for (int x = 0; x < world_params_data->food_exists; x++)
+    // {
+    //     printf("%d-%d ", wrl->items[x].coords.x, wrl->items[x].coords.y);
+    // }
+    // printf("]\n\n");
 }
 
 void update_game_objects(world *wrl, prog_params_data_lord *prog_params_data, world_params_data_lord *world_params_data, log_data_lord *log_data) { // Dwarves, items...

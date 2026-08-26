@@ -189,10 +189,7 @@ void update_dwarf(world *wrl, coord map_size, dwarf *dw, int timer, world_params
 
         if (timer % 1 == 0)
         {
-            dw->hunger += 0.001;
-            if (rand() % 2 > 0) {
-                dw->hunger += 0.0005;
-            }
+            dw->hunger += rand() / 1000000000;
 
             if (dw->hunger >= dw->die_level_hunger) // Die from hunger
             {

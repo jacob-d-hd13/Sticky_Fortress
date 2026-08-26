@@ -125,8 +125,8 @@ int main()
             draw_dwarf(wrl->dwarves[x], prog_params_data);
 
             // char *d = malloc(prog_params_data->text_buffer_size);
-            // sprintf(d, "%d", wrl->dwarves[x].hunger);
-            // DrawText(d, wrl->dwarves[x].coords.x*prog_params_data->rect_size.x - 15, wrl->dwarves[x].coords.y*prog_params_data->rect_size.y - 10, 5, GREEN);
+            // sprintf(d, "%.2f", wrl->dwarves[x].hunger);
+            // DrawText(d, wrl->dwarves[x].coords.x*prog_params_data->rect_size.x - (sizeof(d)/sizeof(char)), wrl->dwarves[x].coords.y*prog_params_data->rect_size.y - 10, 5, GREEN);
         }
 
         Vector2 mp = GetMousePosition(); // Updating info about mouse position
