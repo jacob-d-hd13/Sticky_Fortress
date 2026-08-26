@@ -122,11 +122,7 @@ int main()
 
         for (int x = 0; x < world_params_data->start_dwarves_number; x++) // Draw dwarves
         {
-            draw_dwarf(wrl->dwarves[x], prog_params_data);
-
-            // char *d = malloc(prog_params_data->text_buffer_size);
-            // sprintf(d, "%.2f", wrl->dwarves[x].hunger);
-            // DrawText(d, wrl->dwarves[x].coords.x*prog_params_data->rect_size.x - (sizeof(d)/sizeof(char)), wrl->dwarves[x].coords.y*prog_params_data->rect_size.y - 10, 5, GREEN);
+            draw_dwarf(wrl, wrl->dwarves[x], prog_params_data);
         }
 
         Vector2 mp = GetMousePosition(); // Updating info about mouse position

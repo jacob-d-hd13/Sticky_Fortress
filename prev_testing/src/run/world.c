@@ -121,7 +121,7 @@ void create_world_food(world *wrl, world_params_data_lord *world_params_data, dr
             res_y = rand() % wrl->map_size.y;
         }
 
-    item f = {res_x, res_y, FOOD, draw_data->default_food_char, 1, true}; //50 + rand() % 30
+    item f = {res_x, res_y, FOOD, draw_data->default_food_char, 50 + rand() % 30, true}; 
 
         wrl->items[x] = f;
     }

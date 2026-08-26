@@ -17,12 +17,24 @@ void draw_gui_text(gui_text guitx) // Draw text
     DrawText(guitx.text, guitx.start_coords.x, guitx.start_coords.y, guitx.font_size, guitx.font_color);
 }
 
-void draw_dwarf(dwarf dw, prog_params_data_lord *prog_params_data) // Draw dwarf(ASCII)
+void draw_dwarf(world *wrl, dwarf dw, prog_params_data_lord *prog_params_data) // Draw dwarf(ASCII)
 {
     DrawText(dw.char_value, dw.coords.x * prog_params_data->rect_size.x + 1, dw.coords.y * prog_params_data->rect_size.y - 1, prog_params_data->rect_size.y * 1.3, dw.drawing_color);
+
+    char *dw_hunger_text = malloc(prog_params_data->text_buffer_size);
+    sprintf(dw_hunger_text, "%.2f", dw.hunger);
+    DrawText(dw_hunger_text, dw.coords.x*prog_params_data->rect_size.x - (sizeof(dw_hunger_text)/sizeof(char)), dw.coords.y*prog_params_data->rect_size.y - 10, 12, GREEN);
+
+    free(dw_hunger_text);
 }
 
 void draw_item(item i, prog_params_data_lord *prog_params_data) // Draw item(ASCII)
 {
     DrawText(i.char_value, i.coords.x * prog_params_data->rect_size.x + 1, i.coords.y * prog_params_data->rect_size.y - 1, prog_params_data->rect_size.y * 1.3, YELLOW);
+
+    char *im_num_text = malloc(prog_params_data->text_buffer_size);
+    sprintf(im_num_text, "%.0f", i.number);
+    DrawText(im_num_text, i.coords.x*prog_params_data->rect_size.x, i.coords.y*prog_params_data->rect_size.y - 10, 10, RED);
+
+    free(im_num_text);
 }

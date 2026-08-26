@@ -51,7 +51,7 @@ void delete_ui_lord (ui_lord *uil) {
 }
 
 void update_ui_lord (ui_lord *uil, world_params_data_lord *world_params_data, prog_params_data_lord *prog_params_data) {
-    sprintf(uil->all_gui_text[0].text, "X: %d Y: %d", prog_params_data->mouse_position.x, prog_params_data->mouse_position.y);
+    sprintf(uil->all_gui_text[0].text, "X: %d Y: %d\nLmb to select square, \nrmb to deselect", prog_params_data->mouse_position.x, prog_params_data->mouse_position.y);
 
     sprintf(uil->all_gui_text[1].text, "Selected: \nbasic landscape: %d; \nwater: %d; \nmountains: %d; \nrocks: %d; deep water: %d", 
         world_params_data->cells_selected[0], world_params_data->cells_selected[1], world_params_data->cells_selected[2], world_params_data->cells_selected[3], world_params_data->cells_selected[4]);
@@ -75,6 +75,4 @@ void draw_ui_lord (ui_lord *uil) {
     for (int y = 0; y < 6; y ++) {
         draw_gui_text(uil->all_gui_text[y]);
     }
-
-    DrawText("Lmb to select square, \nrmb to deselect area.", uil->all_gui_text[0].start_coords.x, uil->all_gui_text[0].start_coords.y + 30, 23, GREEN);
 }

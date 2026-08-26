@@ -89,7 +89,7 @@ void generate_structure(world *wrl)
     landscape_structure structure;
 
     if (rand() % 10 > 4) // Landscapes choice
-    { // Mountains have slightly larger chance that water
+    { // Mountains have slightly larger chance than water
         structure.landscape = wrl->world_landscapes[1];
         structure.second_landscape = wrl->world_landscapes[2];
     }
