@@ -6,7 +6,7 @@ prog_params_data_lord *define_prog_params_data_lord () {
     prog_params_data_lord *prog_params_data = malloc(sizeof(prog_params_data_lord));
 
     prog_params_data->window_size = (coord) {1900, 1000};
-    prog_params_data->rect_size = (coord) {15, 15};
+    prog_params_data->rect_size = (coord) {16, 16};
     prog_params_data->text_buffer_size = 500;
 
     prog_params_data->timer = 0;
@@ -31,9 +31,9 @@ world_params_data_lord *define_world_params_data_lord () {
 
     world_params_data->default_name = "test_world";
 
-    world_params_data->start_dwarves_number = 20;
-    world_params_data->start_food_on_map = 20;
-    world_params_data->structures_number = 1;
+    world_params_data->start_dwarves_number = 200;
+    world_params_data->start_food_on_map = world_params_data->start_dwarves_number/10;
+    world_params_data->structures_number = 5;
 
     world_params_data->dwarves_alive = world_params_data->start_dwarves_number;
     world_params_data->dwarves_selected = 0;

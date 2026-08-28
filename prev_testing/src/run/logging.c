@@ -10,6 +10,13 @@ void initialize_log_file(char *source_log_file_path, log_data_lord *log_data) //
 
     log_data->source_log_file = fopen(source_log_file_path, "w");
 
+    if (log_data->source_log_file == NULL)
+    {
+        printf("Not found %s\n", source_log_file_path);
+        free(source_log_file_path);
+        return;
+    }
+
     fflush(log_data->source_log_file);
 }
 

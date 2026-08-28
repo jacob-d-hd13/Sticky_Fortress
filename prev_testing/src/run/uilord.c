@@ -61,9 +61,9 @@ void update_ui_lord (ui_lord *uil, world_params_data_lord *world_params_data, pr
     sprintf(uil->all_gui_text[4].text, "      selected: %d", world_params_data->dwarves_selected);
 
     if (prog_params_data->is_paused) {
-        sprintf(uil->all_gui_text[3].text, "Frame (from 1 to 60) :\n %d\n Is paused :\n true\n\n You can find FPS\n in log files", prog_params_data->timer);
+        sprintf(uil->all_gui_text[3].text, "Frame (from 1 to 60) :\n %d\n Pause :\n on\n\n You can find FPS\n in log files", prog_params_data->timer);
     } else {
-        sprintf(uil->all_gui_text[3].text, "Frame (from 1 to 60) :\n %d\n Is paused :\n false\n\n You can find FPS\n in log files", prog_params_data->timer);
+        sprintf(uil->all_gui_text[3].text, "Frame (from 1 to 60) :\n %d\n Pause :\n off\n\n You can find FPS\n in log files", prog_params_data->timer);
     }
 }
 

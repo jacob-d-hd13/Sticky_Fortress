@@ -10,7 +10,7 @@ void initialize_world_landscapes(world *wrl)
 {
     landscape_type basic_landscape = {LAND_BASIC, "Basic landscape", true, (Color) {3, 130, 0, 225}};
     landscape_type water_landscape = {LAND_WATER, "Water surface", false, (Color){0, 0, 120, 255}};
-    landscape_type deep_water_landscape = {LAND_DEEP_WATER, "Deep water", false, (Color){0, 0, 50, 255}};
+    landscape_type deep_water_landscape = {LAND_DEEP_WATER, "Deep water", false, (Color){50, 50, 120, 255}};
     landscape_type mountains_landscape = {LAND_MOUNTAINS, "Mountains and hills", true, (Color){118, 114, 113, 255}};
     landscape_type rock_landscape = {LAND_ROCK, "Hard rock landscape", false, (Color){68, 64, 63, 255}};
 
@@ -85,8 +85,8 @@ void create_dwarves(world *wrl, world_params_data_lord *world_params_data, prog_
         sprintf(dwarf_game_id, "%d", x);
 
         dwarf dw = {dwarf_game_id, "Dwarf", true, true, draw_data->default_human_char, dw_x, dw_y, UNTARGET_MOVING, -1, 0, 0, 0, rand () % 500 + 1000 + rand () % 500, 0, RED};
-        //                              dwarvenness  is                                                      target target  hunger          die level            sleepiness
-        //                                           alive                                                  food id   cell coords           hunger   
+        //                              dwarvenness  is                                                        target target  hunger              die level          sleepiness
+        //                                           alive                                                    food id  cell                       hunger   
 
         if (x > 0 && x < world_params_data->start_dwarves_number - 1) {
 
@@ -129,32 +129,32 @@ void create_world_food(world *wrl, world_params_data_lord *world_params_data, dr
 
 void delete_world(world *wrl, world_params_data_lord *world_params_data, log_data_lord *log_data)
 {
-    fprintf(wrl->world_file, "==DATA==\n");
-    fprintf(wrl->world_file, "[WORLD_NAME]:%s\n", wrl->world_name);
+    fprintf(wrl->world_file, "{BLOCK_NAME}==DATA=={END}\n");
+    fprintf(wrl->world_file, "{STAT_DATA}[WORLD_NAME]:%s{END}\n", wrl->world_name);
     fflush(wrl->world_file);
 
-    fprintf(wrl->world_file, "[DWARVES_ALIVE]:%d\n", world_params_data->dwarves_alive);
-    fprintf(wrl->world_file, "[FOOD_REMAINING]:%d\n", world_params_data->food_exists);
+    fprintf(wrl->world_file, "{STAT_DATA}[DWARVES_ALIVE]:%d{END}\n", world_params_data->dwarves_alive);
+    fprintf(wrl->world_file, "{STAT_DATA}[FOOD_REMAINING]:%d{END}\n", world_params_data->food_exists);
     fflush(wrl->world_file);
 
-    fprintf(wrl->world_file, "\n==DWARVES_LIST==\n");
+    fprintf(wrl->world_file, "\n{BLOCK}==DWARVES_LIST=={END}\n");
 
     for (int x = 0; x < world_params_data->start_dwarves_number; x++)
     {
-        fprintf(wrl->world_file, "{DWARF}[ID]:%s|[GAME_NAME]:%s|[DWARVENNESS]:%d|[IS_ALIVE]:%d|[DRAWING_CHAR]:%s|[COORDS]:%d,%d|[HUNGER]:%f|[DIE_LEVEL_HUNGER]:%f|[SLEEPINESS]:%f\n", 
+        fprintf(wrl->world_file, "{DWARF}[ID]:%s|[GAME_NAME]:%s|[DWARVENNESS]:%d|[IS_ALIVE]:%d|[DRAWING_CHAR]:%s|[COORDS]:%d,%d|[HUNGER]:%f|[DIE_LEVEL_HUNGER]:%f|[SLEEPINESS]:%f{END}\n", 
             wrl->dwarves[x].game_id, wrl->dwarves[x].game_name, wrl->dwarves[x].dwarvenness, wrl->dwarves[x].is_alive, wrl->dwarves[x].char_value,
             wrl->dwarves[x].coords.x, wrl->dwarves[x].coords.y, wrl->dwarves[x].hunger, wrl->dwarves[x].die_level_hunger, wrl->dwarves[x].sleepiness);
 
         fflush(wrl->world_file);
     }
 
-    fprintf(wrl->world_file, "\n==WORLD_MAP==\n");
+    fprintf(wrl->world_file, "\n{BLOCK}==WORLD_MAP=={END}\n");
 
     for (int xx = 0; xx < wrl->map_size.x; xx++)
     {
         for (int yy = 0; yy < wrl->map_size.y; yy++)
         { 
-            fprintf(wrl->world_file, "{CELL}[COORDS]:%d,%d|[IS_SELECTED]:%d|[IS_OCCUPIED]:%d|[LANDSCAPE]:%d", 
+            fprintf(wrl->world_file, "{CELL}[COORDS]:%d,%d|[IS_SELECTED]:%d|[IS_OCCUPIED]:%d|[LANDSCAPE]:%d{END}", 
                 wrl->map[cell_id_in_map(xx, yy, wrl->map_size.x)].l_coord.x, wrl->map[cell_id_in_map(xx, yy, wrl->map_size.x)].l_coord.y, 
                 wrl->map[cell_id_in_map(xx, yy, wrl->map_size.x)].is_selected, wrl->map[cell_id_in_map(xx, yy, wrl->map_size.x)].is_occupied, wrl->map[cell_id_in_map(xx, yy, wrl->map_size.x)].land_type);
             

@@ -171,6 +171,7 @@ void update_selection(world *wrl, world_params_data_lord *world_params_data, pro
     } 
     else if (IsKeyDown(KEY_ESCAPE))
     {
+        prog_params_data->if_square_selecting_active = !prog_params_data->if_square_selecting_active;
         deselect_all_world_map(wrl, world_params_data);
     }
 

@@ -33,13 +33,6 @@ int main()
     char *source_log_file_path = malloc(prog_params_data->text_buffer_size);
     initialize_log_file(source_log_file_path, log_data);
 
-    if (log_data->source_log_file == NULL)
-    {
-        printf("Not found %s\n", source_log_file_path);
-        free(source_log_file_path);
-        return 1;
-    }
-
     raw_log_to_file(log_data, LOGS_BARRIERS);
     log_to_file(log_data, "PROGRAM STARTED\n");
     raw_log_to_file(log_data, LOGS_BARRIERS);
@@ -72,10 +65,7 @@ int main()
     SetExitKey(KEY_Q); // If active, window willn't close on ESC button
 
     Image window_icon = LoadImage("./images/window_icon.png"); // Loading icon
-    if (window_icon.format != PIXELFORMAT_UNCOMPRESSED_R8G8B8A8) // Formatting icon
-    {
-        ImageFormat(&window_icon, PIXELFORMAT_UNCOMPRESSED_R8G8B8A8);
-    }
+    ImageFormat(&window_icon, PIXELFORMAT_UNCOMPRESSED_R8G8B8A8); // Formatting icon
     ImageColorReplace(&window_icon, WHITE, BLANK);
     SetWindowIcon(window_icon);
 

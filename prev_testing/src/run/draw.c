@@ -23,7 +23,7 @@ void draw_dwarf(world *wrl, dwarf dw, prog_params_data_lord *prog_params_data) /
 
     char *dw_hunger_text = malloc(prog_params_data->text_buffer_size);
     sprintf(dw_hunger_text, "%.2f", dw.hunger);
-    DrawText(dw_hunger_text, dw.coords.x*prog_params_data->rect_size.x - (sizeof(dw_hunger_text)/sizeof(char)), dw.coords.y*prog_params_data->rect_size.y - 10, 12, GREEN);
+    DrawText(dw_hunger_text, dw.coords.x*prog_params_data->rect_size.x - (sizeof(dw_hunger_text)/sizeof(char)), dw.coords.y*prog_params_data->rect_size.y - 10, 11, YELLOW);
 
     free(dw_hunger_text);
 }
