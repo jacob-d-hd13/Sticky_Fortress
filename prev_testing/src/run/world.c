@@ -137,7 +137,7 @@ void delete_world(world *wrl, world_params_data_lord *world_params_data, log_dat
     fprintf(wrl->world_file, "{STAT_DATA}[FOOD_REMAINING]:%d{END}\n", world_params_data->food_exists);
     fflush(wrl->world_file);
 
-    fprintf(wrl->world_file, "\n{BLOCK}==DWARVES_LIST=={END}\n");
+    fprintf(wrl->world_file, "\n{BLOCK_NAME}==DWARVES_LIST=={END}\n");
 
     for (int x = 0; x < world_params_data->start_dwarves_number; x++)
     {
@@ -148,7 +148,7 @@ void delete_world(world *wrl, world_params_data_lord *world_params_data, log_dat
         fflush(wrl->world_file);
     }
 
-    fprintf(wrl->world_file, "\n{BLOCK}==WORLD_MAP=={END}\n");
+    fprintf(wrl->world_file, "\n{BLOCK_NAME}==WORLD_MAP=={END}\n");
 
     for (int xx = 0; xx < wrl->map_size.x; xx++)
     {

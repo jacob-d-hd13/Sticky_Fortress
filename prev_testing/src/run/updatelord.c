@@ -22,6 +22,10 @@ void update_game_running_params(prog_params_data_lord *prog_params_data, log_dat
     if (prog_params_data->square_selecting_freeze > 0) { // Update freeze time for selecting 
         prog_params_data->square_selecting_freeze --;
     }
+
+    Vector2 mp = GetMousePosition(); // Updating info about mouse position
+    prog_params_data->mouse_position.x = mp.x;
+    prog_params_data->mouse_position.y = mp.y;
 }
 
 void delete_item(world *wrl, int id, world_params_data_lord *world_params_data) {
@@ -66,7 +70,7 @@ void update_game_objects(world *wrl, prog_params_data_lord *prog_params_data, wo
                 delete_item(wrl, u, world_params_data);
             }
 
-            if ((rand() % 500) == 1) {
+            if ((rand() % 400) == 1) {
                 wrl->items[u].number ++;
 
                 char *si = malloc(sizeof(char)*12);

@@ -15,43 +15,63 @@ void move_dwarf(direction direct, dwarf *dw, world *wrl)
     case RIGHT:
         if (dw->coords.x + 1 < wrl->map_size.x && wrl->map[cell_id_in_map(dw->coords.x + 1, dw->coords.y, wrl->map_size.x)].land_type.can_be_occupied)
         {
-            wrl->map[cell_id_in_map(dw->coords.x + 1, dw->coords.y, wrl->map_size.x)].is_occupied = false;
+            wrl->map[cell_id_in_map(dw->coords.x, dw->coords.y, wrl->map_size.x)].is_occupied = false;
             dw->coords.x++;
 
-            wrl->map[cell_id_in_map(dw->coords.x + 1, dw->coords.y, wrl->map_size.x)].is_occupied = true;
+            wrl->map[cell_id_in_map(dw->coords.x, dw->coords.y, wrl->map_size.x)].is_occupied = true;
         }
 
         break;
     case LEFT:
         if (dw->coords.x - 1 >= 0 && wrl->map[cell_id_in_map(dw->coords.x - 1, dw->coords.y, wrl->map_size.x)].land_type.can_be_occupied)
         {
-            wrl->map[cell_id_in_map(dw->coords.x + 1, dw->coords.y, wrl->map_size.x)].is_occupied = false;
+            wrl->map[cell_id_in_map(dw->coords.x, dw->coords.y, wrl->map_size.x)].is_occupied = false;
             dw->coords.x--;
 
-            wrl->map[cell_id_in_map(dw->coords.x + 1, dw->coords.y, wrl->map_size.x)].is_occupied = true;
+            wrl->map[cell_id_in_map(dw->coords.x, dw->coords.y, wrl->map_size.x)].is_occupied = true;
         }
 
         break;
     case DOWN:
         if (dw->coords.y + 1 < wrl->map_size.y && wrl->map[cell_id_in_map(dw->coords.x, dw->coords.y + 1, wrl->map_size.x)].land_type.can_be_occupied)
         {
-            wrl->map[cell_id_in_map(dw->coords.x + 1, dw->coords.y, wrl->map_size.x)].is_occupied = false;
+            wrl->map[cell_id_in_map(dw->coords.x, dw->coords.y, wrl->map_size.x)].is_occupied = false;
             dw->coords.y++;
 
-            wrl->map[cell_id_in_map(dw->coords.x + 1, dw->coords.y, wrl->map_size.x)].is_occupied = true;
+            wrl->map[cell_id_in_map(dw->coords.x, dw->coords.y, wrl->map_size.x)].is_occupied = true;
         }
 
         break;
     case UP:
         if (dw->coords.y - 1 >= 0 && wrl->map[cell_id_in_map(dw->coords.x, dw->coords.y - 1, wrl->map_size.x)].land_type.can_be_occupied)
         {
-            wrl->map[cell_id_in_map(dw->coords.x + 1, dw->coords.y, wrl->map_size.x)].is_occupied = false;
+            wrl->map[cell_id_in_map(dw->coords.x, dw->coords.y, wrl->map_size.x)].is_occupied = false;
             dw->coords.y--;
 
-            wrl->map[cell_id_in_map(dw->coords.x + 1, dw->coords.y, wrl->map_size.x)].is_occupied = true;
+            wrl->map[cell_id_in_map(dw->coords.x, dw->coords.y, wrl->map_size.x)].is_occupied = true;
         }
 
         break;
+    }
+}
+
+void continue_moving_to_target_food(dwarf *dw, world *wrl) {
+    if (dw->coords.x < wrl->items[dw->target_food_id].coords.x)
+    {
+        move_dwarf(RIGHT, dw, wrl);
+    }
+    else if (dw->coords.x > wrl->items[dw->target_food_id].coords.x)
+    {
+        move_dwarf(LEFT, dw, wrl);
+    }
+
+    else if (dw->coords.y < wrl->items[dw->target_food_id].coords.y)
+    {
+        move_dwarf(DOWN, dw, wrl);
+    }
+    else if (dw->coords.y > wrl->items[dw->target_food_id].coords.y)
+    {
+        move_dwarf(UP, dw, wrl);
     }
 }
 
@@ -80,8 +100,8 @@ bool find_nearest_food(world *wrl, dwarf *dw, world_params_data_lord *world_para
             dw->target_food_id = z;
             min_distance = abs(dw->coords.x - wrl->items[z].coords.x) + abs(dw->coords.y - wrl->items[z].coords.y);
 
-            dw->target_cell_coords.x = wrl->items[z].coords.x;
-            dw->target_cell_coords.y = wrl->items[z].coords.y;
+            wrl->items[dw->target_food_id].coords.x = wrl->items[z].coords.x;
+            wrl->items[dw->target_food_id].coords.y = wrl->items[z].coords.y;
 
             is_exist_any_food = true;
         }
@@ -150,23 +170,7 @@ void update_dwarf(world *wrl, coord map_size, dwarf *dw, int timer, world_params
             }
             else if (dw->moving_state == TARGETING) // Go to target
             {
-                if (dw->coords.x < dw->target_cell_coords.x)
-                {
-                    move_dwarf(RIGHT, dw, wrl);
-                }
-                else if (dw->coords.x > dw->target_cell_coords.x)
-                {
-                    move_dwarf(LEFT, dw, wrl);
-                }
-
-                else if (dw->coords.y < dw->target_cell_coords.y)
-                {
-                    move_dwarf(DOWN, dw, wrl);
-                }
-                else if (dw->coords.y > dw->target_cell_coords.y)
-                {
-                    move_dwarf(UP, dw, wrl);
-                }
+                continue_moving_to_target_food(dw, wrl);
             }
             else if (dw->moving_state == EATING) // Eating
             {

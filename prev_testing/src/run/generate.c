@@ -105,7 +105,7 @@ void generate_structure(world *wrl)
     }
 
     int pond = 0;
-    int pond_step = 22; // If step larger - structure more solid; if less - structure more thin
+    int pond_step = 16; // If step larger - structure more solid; if less - structure more thin
 
     coord size_val = (coord) {wrl->map_size.x / 20, wrl->map_size.y / 15};
     coord skeleton_x_size = (coord) {size_val.x + rand() % size_val.x, size_val.x + rand() % size_val.x}; // Size borders of structure skeleton
@@ -128,8 +128,8 @@ void generate_structure(world *wrl)
         }
 
         if (50 + rand() % 100 < pond) {
-            wrl->map[cell_id_in_map(a, zone_center_coord.y - 1 - (rand() % rm_borders.y), wrl->map_size.x)].land_type = structure.landscape;
-            wrl->map[cell_id_in_map(a, zone_center_coord.y + 1 + (rand() % rm_borders.y), wrl->map_size.x)].land_type = structure.landscape;
+            wrl->map[cell_id_in_map(a, zone_center_coord.y - 1, wrl->map_size.x)].land_type = structure.landscape;
+            wrl->map[cell_id_in_map(a, zone_center_coord.y + 1, wrl->map_size.x)].land_type = structure.landscape;
 
             wrl->map[cell_id_in_map(a, zone_center_coord.y, wrl->map_size.x)].land_type = structure.second_landscape;
         }
@@ -150,8 +150,8 @@ void generate_structure(world *wrl)
         }
 
         if (60 + rand() % 100 < pond) {
-            wrl->map[cell_id_in_map(zone_center_coord.x - 1 - (rand() % rm_borders.y), b, wrl->map_size.x)].land_type = structure.landscape;
-            wrl->map[cell_id_in_map(zone_center_coord.x + 1 + (rand() % rm_borders.x), b, wrl->map_size.x)].land_type = structure.landscape;
+            wrl->map[cell_id_in_map(zone_center_coord.x - 1, b, wrl->map_size.x)].land_type = structure.landscape;
+            wrl->map[cell_id_in_map(zone_center_coord.x + 1, b, wrl->map_size.x)].land_type = structure.landscape;
 
             wrl->map[cell_id_in_map(zone_center_coord.x, b, wrl->map_size.x)].land_type = structure.second_landscape;
         }

@@ -94,7 +94,7 @@ typedef struct
     dwarf_moving_state moving_state;
     int target_food_id;
 
-    coord target_cell_coords;
+    coord nm_target_cell_coords;
 
     float hunger;
     float die_level_hunger;

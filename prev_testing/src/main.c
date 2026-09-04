@@ -115,10 +115,6 @@ int main()
             draw_dwarf(wrl, wrl->dwarves[x], prog_params_data);
         }
 
-        Vector2 mp = GetMousePosition(); // Updating info about mouse position
-        prog_params_data->mouse_position.x = mp.x;
-        prog_params_data->mouse_position.y = mp.y;
-
         update_ui_lord(ui_central, world_params_data, prog_params_data); // Update main UI 
         draw_ui_lord(ui_central); // Draw main UI
 
