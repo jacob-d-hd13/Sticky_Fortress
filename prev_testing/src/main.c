@@ -84,36 +84,12 @@ int main()
 
         BeginDrawing();
 
-        world_params_data->dwarves_alive = 0;
-        world_params_data->dwarves_selected = 0;
-
         ClearBackground(BLACK); // Clear background
 
-        update_game_objects(wrl, prog_params_data, world_params_data, log_data);
         update_game_stats(wrl, world_params_data);
+        update_game_objects(wrl, prog_params_data, world_params_data, log_data);
 
-        for (int x = 0; x < wrl->map_size.x; x++) // Drawing map
-        {
-            for (int y = 0; y < wrl->map_size.y; y++)
-            {
-                if (wrl->map[cell_id_in_map(x, y, wrl->map_size.x)].is_selected == true) // If cell is selected
-                {
-                    DrawRectangle(x * prog_params_data->rect_size.x, y * prog_params_data->rect_size.y, prog_params_data->rect_size.x + 1, prog_params_data->rect_size.y + 1, GOLD); 
-                }
-
-                DrawRectangle(x * prog_params_data->rect_size.x + 1, y * prog_params_data->rect_size.y + 1, prog_params_data->rect_size.x - 1, prog_params_data->rect_size.y - 1, wrl->map[cell_id_in_map(x, y, wrl->map_size.x)].land_type.draw_color);
-            }
-        }
-
-        for (int x = 0; x < world_params_data->food_exists; x++) // Draw items
-        {
-            draw_item(wrl->items[x], prog_params_data);
-        }
-
-        for (int x = 0; x < world_params_data->start_dwarves_number; x++) // Draw dwarves
-        {
-            draw_dwarf(wrl, wrl->dwarves[x], prog_params_data);
-        }
+        draw_world_graphics(wrl, prog_params_data, world_params_data);
 
         update_ui_lord(ui_central, world_params_data, prog_params_data); // Update main UI 
         draw_ui_lord(ui_central); // Draw main UI

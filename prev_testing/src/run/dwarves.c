@@ -7,7 +7,6 @@
 // Aaaaaaaargh
 // TODO: Fix all
 
-
 void move_dwarf(direction direct, dwarf *dw, world *wrl)
 {
     switch (direct)

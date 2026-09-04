@@ -38,3 +38,28 @@ void draw_item(item i, prog_params_data_lord *prog_params_data) // Draw item(ASC
 
     free(im_num_text);
 }
+
+void draw_world_graphics(world *wrl, prog_params_data_lord *prog_params_data, world_params_data_lord *world_params_data) {
+    for (int x = 0; x < wrl->map_size.x; x++) // Drawing map
+    {
+        for (int y = 0; y < wrl->map_size.y; y++)
+        {
+            if (wrl->map[cell_id_in_map(x, y, wrl->map_size.x)].is_selected == true) // If cell is selected
+            {
+                DrawRectangle(x * prog_params_data->rect_size.x, y * prog_params_data->rect_size.y, prog_params_data->rect_size.x + 1, prog_params_data->rect_size.y + 1, GOLD); 
+            }
+
+            DrawRectangle(x * prog_params_data->rect_size.x + 1, y * prog_params_data->rect_size.y + 1, prog_params_data->rect_size.x - 1, prog_params_data->rect_size.y - 1, wrl->map[cell_id_in_map(x, y, wrl->map_size.x)].land_type.draw_color);
+        }
+    }
+
+    for (int x = 0; x < world_params_data->food_exists; x++) // Draw items
+    {
+        draw_item(wrl->items[x], prog_params_data);
+    }
+
+    for (int x = 0; x < world_params_data->start_dwarves_number; x++) // Draw dwarves
+    {
+        draw_dwarf(wrl, wrl->dwarves[x], prog_params_data);
+    }
+}

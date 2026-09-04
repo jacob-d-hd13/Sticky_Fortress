@@ -90,6 +90,9 @@ void update_game_objects(world *wrl, prog_params_data_lord *prog_params_data, wo
 }
 
 void update_game_stats(world *wrl, world_params_data_lord *world_params_data) {
+    world_params_data->dwarves_alive = 0;
+    world_params_data->dwarves_selected = 0;
+
     for (int u = 0; u < 5; u++) // Reset selected landscape cells stats
     {
         world_params_data->cells_selected[u] = 0;
