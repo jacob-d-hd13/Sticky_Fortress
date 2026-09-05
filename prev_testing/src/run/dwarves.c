@@ -54,7 +54,8 @@ void move_dwarf(direction direct, dwarf *dw, world *wrl)
     }
 }
 
-void continue_moving_to_target_food(dwarf *dw, world *wrl) {
+void continue_moving_to_target_food(dwarf *dw, world *wrl)
+{
     if (dw->coords.x < wrl->items[dw->target_food_id].coords.x)
     {
         move_dwarf(RIGHT, dw, wrl);
@@ -74,17 +75,18 @@ void continue_moving_to_target_food(dwarf *dw, world *wrl) {
     }
 }
 
-void restore_hunger_dwarf(world  *wrl, dwarf *dw, world_params_data_lord *world_params_data, log_data_lord *log_data)
+void restore_hunger_dwarf(world *wrl, dwarf *dw, world_params_data_lord *world_params_data, log_data_lord *log_data)
 {
     if (wrl->items[dw->target_food_id].number > 0)
-    {        
+    {
         wrl->items[dw->target_food_id].number--;
 
-        dw->hunger -= (dw->die_level_hunger/4) + (rand()%20) / (float)(1 + rand()%5);
-        if (dw->hunger < 0) {
+        dw->hunger -= (dw->die_level_hunger / 4) + (rand() % 20) / (float)(1 + rand() % 5);
+        if (dw->hunger < 0)
+        {
             dw->hunger = 0;
         }
-    }   
+    }
 }
 
 bool find_nearest_food(world *wrl, dwarf *dw, world_params_data_lord *world_params_data)
@@ -151,21 +153,21 @@ void update_dwarf(world *wrl, coord map_size, dwarf *dw, int timer, world_params
         {
             if (dw->moving_state == UNTARGET_MOVING) // Random moving
             {
-                switch (random_for_move) {
-                    case 1:
-                        move_dwarf(RIGHT, dw, wrl);
+                switch (random_for_move)
+                {
+                case 1:
+                    move_dwarf(RIGHT, dw, wrl);
                     break;
-                    case 2:
-                        move_dwarf(LEFT, dw, wrl);
+                case 2:
+                    move_dwarf(LEFT, dw, wrl);
                     break;
-                    case 3:
-                        move_dwarf(DOWN, dw, wrl);
+                case 3:
+                    move_dwarf(DOWN, dw, wrl);
                     break;
-                    case 4:
-                        move_dwarf(UP, dw, wrl);
+                case 4:
+                    move_dwarf(UP, dw, wrl);
                     break;
                 }
-
             }
             else if (dw->moving_state == TARGETING) // Go to target
             {
@@ -192,7 +194,7 @@ void update_dwarf(world *wrl, coord map_size, dwarf *dw, int timer, world_params
 
         if (timer % 1 == 0)
         {
-            dw->hunger += (rand()%10) / (float)(1 + rand()%200);
+            dw->hunger += (rand() % 10) / (float)(1 + rand() % 200);
 
             if (dw->hunger >= dw->die_level_hunger) // Die from hunger
             {
@@ -204,26 +206,30 @@ void update_dwarf(world *wrl, coord map_size, dwarf *dw, int timer, world_params
         }
 
         dw->drawing_color = GREEN;
-        world_params_data->dwarves_alive ++;
+        world_params_data->dwarves_alive++;
 
         if (wrl->map[cell_id_in_map(dw->coords.x, dw->coords.y, wrl->map_size.x)].is_selected)
         {
             dw->drawing_color = RED;
-            world_params_data->dwarves_selected ++;
+            world_params_data->dwarves_selected++;
         }
         else if (!dw->is_alive)
         {
             dw->drawing_color = GRAY;
-            world_params_data->dwarves_alive --;
+            world_params_data->dwarves_alive--;
         }
         else if (dw->moving_state == EATING)
         {
             dw->drawing_color = ORANGE;
-        } else if (is_enough_hunger_reached)
+        }
+        else if (is_enough_hunger_reached)
         {
-            if (timer > 20) {
+            if (timer > 20)
+            {
                 dw->drawing_color = BLUE;
-            } else {
+            }
+            else
+            {
                 dw->drawing_color = GREEN;
             }
         }

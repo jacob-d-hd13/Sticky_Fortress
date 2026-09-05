@@ -3,10 +3,10 @@
 
 void initialize_log_file(char *source_log_file_path, log_data_lord *log_data) // Initializing log file
 {
-    sprintf(source_log_file_path, "./logs/latest.log"); 
-            /*"../logs/program_execution_%02d_%02d_%02d_%02d_%02d",
-            tm->tm_year + 1900, tm->tm_mon + 1, tm->tm_mday,
-            tm->tm_hour, tm->tm_min;*/
+    sprintf(source_log_file_path, "./logs/latest.log");
+    /*"../logs/program_execution_%02d_%02d_%02d_%02d_%02d",
+    tm->tm_year + 1900, tm->tm_mon + 1, tm->tm_mday,
+    tm->tm_hour, tm->tm_min;*/
 
     log_data->source_log_file = fopen(source_log_file_path, "w");
 

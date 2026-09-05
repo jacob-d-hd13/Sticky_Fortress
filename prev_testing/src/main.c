@@ -25,7 +25,7 @@ int main()
     prog_params_data_lord *prog_params_data = define_prog_params_data_lord();
     world_params_data_lord *world_params_data = define_world_params_data_lord();
     draw_data_lord *draw_data = define_draw_data_lord();
-    log_data_lord*log_data = define_log_data_lord();
+    log_data_lord *log_data = define_log_data_lord();
 
     srand(time(NULL));
 
@@ -46,7 +46,7 @@ int main()
 
     sprintf(init_log_info, "%s %d,%d\n\n", "Defined cell size", prog_params_data->rect_size.x, prog_params_data->rect_size.y);
     log_to_file(log_data, init_log_info);
-    
+
     sprintf(init_log_info, "Defined map size %d, %d\n", map_size.x, map_size.y);
     log_to_file(log_data, init_log_info);
 
@@ -64,7 +64,7 @@ int main()
 
     SetExitKey(KEY_Q); // If active, window willn't close on ESC button
 
-    Image window_icon = LoadImage("./images/window_icon.png"); // Loading icon
+    Image window_icon = LoadImage("./images/window_icon.png");    // Loading icon
     ImageFormat(&window_icon, PIXELFORMAT_UNCOMPRESSED_R8G8B8A8); // Formatting icon
     ImageColorReplace(&window_icon, WHITE, BLANK);
     SetWindowIcon(window_icon);
@@ -74,9 +74,9 @@ int main()
     // Initialize main UI
     ui_lord *ui_central = initialize_ui_lord(prog_params_data, draw_data->default_font_size);
 
-    raw_log_to_file(log_data,  LOGS_BARRIERS);
+    raw_log_to_file(log_data, LOGS_BARRIERS);
     log_to_file(log_data, "STARTED APP\n");
-    raw_log_to_file(log_data,  LOGS_BARRIERS);
+    raw_log_to_file(log_data, LOGS_BARRIERS);
 
     while (!WindowShouldClose())
     {
@@ -91,8 +91,8 @@ int main()
 
         draw_world_graphics(wrl, prog_params_data, world_params_data);
 
-        update_ui_lord(ui_central, world_params_data, prog_params_data); // Update main UI 
-        draw_ui_lord(ui_central); // Draw main UI
+        update_ui_lord(ui_central, world_params_data, prog_params_data);
+        draw_ui_lord(ui_central);
 
         update_selection(wrl, world_params_data, prog_params_data);
 
