@@ -191,7 +191,7 @@ typedef struct
 
 typedef struct
 {
-    struct tm *tm; 
+    struct tm *tm;
     FILE *source_log_file;
     time_t raw_time;
 } log_data_lord;

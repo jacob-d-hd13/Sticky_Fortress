@@ -11,7 +11,7 @@ void initialize_world_landscapes(world *wrl)
     landscape_type basic_landscape = {LAND_BASIC, "Basic landscape", true, (Color){3, 130, 0, 225}};
     landscape_type water_landscape = {LAND_WATER, "Water surface", false, (Color){0, 0, 120, 255}};
     landscape_type deep_water_landscape = {LAND_DEEP_WATER, "Deep water", false, (Color){10, 10, 75, 255}};
-    landscape_type mountains_landscape = {LAND_MOUNTAINS, "Mountains and hills", true, (Color){118, 114, 113, 255}};
+    landscape_type mountains_landscape = {LAND_MOUNTAINS, "Mountains and hills", false, (Color){118, 114, 113, 255}};
     landscape_type rock_landscape = {LAND_ROCK, "Hard rock landscape", false, (Color){68, 64, 63, 255}};
 
     wrl->world_landscapes[0] = basic_landscape;
@@ -86,7 +86,7 @@ void create_dwarves(world *wrl, world_params_data_lord *world_params_data, prog_
         char *dwarf_game_id = malloc(prog_params_data->text_buffer_size);
         sprintf(dwarf_game_id, "%d", x);
 
-        dwarf dw = {dwarf_game_id, "Dwarf", true, true, draw_data->default_human_char, dw_x, dw_y, UNTARGET_MOVING, -1, 0, 0, 0, rand() % 500 + 1000 + rand() % 500, 0, RED};
+        dwarf dw = {dwarf_game_id, "Dwarf", true, true, draw_data->default_human_char, dw_x, dw_y, UNTARGET_MOVING, -1, 0, 0, 1000, rand() % 500 + 1000 + rand() % 500, 0, RED};
         //                              dwarvenness  is                                                        target target  hunger              die level          sleepiness
         //                                           alive                                                    food id  cell                       hunger
 

@@ -4,10 +4,11 @@
 #include "types.h"
 #include <time.h>
 
-void move_dwarf(direction direct, dwarf *dw, world *wrl);
-void continue_moving_to_target_food(dwarf *dw, world *wrl);
-void restore_hunger_dwarf(world  *wrl, dwarf *dw, world_params_data_lord *world_params_data, log_data_lord *log_data);
+bool move_dwarf(direction direct, dwarf *dw, world *wrl);
+void bypass_obstacle(dwarf *dw, world *wrl, direction direct);
+void continue_moving_to_target_cell(dwarf *dw, world *wrl);
+void restore_hunger_dwarf(world *wrl, dwarf *dw, world_params_data_lord *world_params_data, log_data_lord *log_data);
 bool find_nearest_food(world *wrl, dwarf *dw, world_params_data_lord *world_params_data);
-void update_dwarf(world *wrl, coord map_size, dwarf *dw, int timer, world_params_data_lord *world_params_data, log_data_lord *log_data) ;
+void update_dwarf(world *wrl, coord map_size, dwarf *dw, int timer, world_params_data_lord *world_params_data, log_data_lord *log_data);
 
-#endif 
+#endif
