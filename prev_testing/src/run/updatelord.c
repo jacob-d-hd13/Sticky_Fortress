@@ -32,27 +32,12 @@ void update_game_running_params(prog_params_data_lord *prog_params_data, log_dat
 
 void delete_item(world *wrl, int id, world_params_data_lord *world_params_data)
 {
-    // printf("[");
-    // for (int x = 0; x < world_params_data->food_exists; x++)
-    // {
-
-    //     printf("%d-%d ", wrl->items[x].coords.x, wrl->items[x].coords.y);
-    // }
-    // printf("]\n");
-
     for (int c = id; c < world_params_data->food_exists; c++)
     {
         wrl->items[c] = wrl->items[c + 1];
     }
 
     world_params_data->food_exists--;
-
-    // printf("[");
-    // for (int x = 0; x < world_params_data->food_exists; x++)
-    // {
-    //     printf("%d-%d ", wrl->items[x].coords.x, wrl->items[x].coords.y);
-    // }
-    // printf("]\n\n");
 }
 
 void update_game_objects(world *wrl, prog_params_data_lord *prog_params_data, world_params_data_lord *world_params_data, log_data_lord *log_data)

@@ -86,7 +86,7 @@ void create_dwarves(world *wrl, world_params_data_lord *world_params_data, prog_
         char *dwarf_game_id = malloc(prog_params_data->text_buffer_size);
         sprintf(dwarf_game_id, "%d", x);
 
-        dwarf dw = {dwarf_game_id, "Dwarf", true, true, draw_data->default_human_char, dw_x, dw_y, UNTARGET_MOVING, -1, 0, 0, 1000, rand() % 500 + 1000 + rand() % 500, 0, RED};
+        dwarf dw = {dwarf_game_id, "Dwarf", true, true, draw_data->default_human_char, dw_x, dw_y, UNTARGET_MOVING, -1, 0, 0, RIGHT, 0, rand() % 500 + 1000 + rand() % 500, 0, RED};
         //                              dwarvenness  is                                                        target target  hunger              die level          sleepiness
         //                                           alive                                                    food id  cell                       hunger
 

@@ -72,15 +72,26 @@ bool move_dwarf(direction direct, dwarf *dw, world *wrl)
     return true;
 }
 
-void bypass_obstacle(dwarf *dw, world *wrl, direction direct)
+void bypass_obstacle(dwarf *dw, world *wrl)
 {
-    if (direct == RIGHT || direct == LEFT) {
+    if (dw->nm_direct == RIGHT || dw->nm_direct == LEFT)
+    {
+        if (!wrl->map[cell_id_in_map(dw->nm_target_cell_coords.x, dw->nm_target_cell_coords.y + 1, wrl->map_size.x)].land_type.can_be_occupied) {
+            dw->nm_direct = DOWN; // <-- This doesn't affect to ...
+        }
+
         dw->nm_target_cell_coords.x = dw->coords.x;
-        dw->nm_target_cell_coords.y = dw->coords.y + 1;
-    } else {
-        dw->nm_target_cell_coords.x = dw->coords.x + 1;
-        dw->nm_target_cell_coords.y = dw->coords.y;
+        dw->nm_target_cell_coords.y = dw->coords.y + 2; // This
     }
+    else
+    {
+        if (!wrl->map[cell_id_in_map(dw->nm_target_cell_coords.x + 1, dw->nm_target_cell_coords.y, wrl->map_size.x)].land_type.can_be_occupied) {
+            dw->nm_direct = RIGHT;  // <-- This doesn't affect to ...
+        }
+
+        dw->nm_target_cell_coords.x = dw->coords.x + 2; // This
+        dw->nm_target_cell_coords.y = dw->coords.y;
+    } 
 }
 
 void continue_moving_to_target_cell(dwarf *dw, world *wrl)
@@ -89,14 +100,16 @@ void continue_moving_to_target_cell(dwarf *dw, world *wrl)
     {
         if (!move_dwarf(RIGHT, dw, wrl))
         {
-            bypass_obstacle(dw, wrl, RIGHT);
+            dw->nm_direct = RIGHT;
+            bypass_obstacle(dw, wrl);
         }
     }
     if (dw->coords.x > dw->nm_target_cell_coords.x)
     {
         if (!move_dwarf(LEFT, dw, wrl))
         {
-            bypass_obstacle(dw, wrl, LEFT);
+            dw->nm_direct = LEFT;
+            bypass_obstacle(dw, wrl);
         }
     }
 
@@ -104,14 +117,16 @@ void continue_moving_to_target_cell(dwarf *dw, world *wrl)
     {
         if (!move_dwarf(DOWN, dw, wrl))
         {
-            bypass_obstacle(dw, wrl, DOWN);
+            dw->nm_direct = DOWN;
+            bypass_obstacle(dw, wrl);
         }
     }
     if (dw->coords.y > dw->nm_target_cell_coords.y)
     {
         if (!move_dwarf(UP, dw, wrl))
         {
-            bypass_obstacle(dw, wrl, UP);
+            dw->nm_direct = UP;
+            bypass_obstacle(dw, wrl);
         }
     }
 }

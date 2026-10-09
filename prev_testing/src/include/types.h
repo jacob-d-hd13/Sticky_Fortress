@@ -95,6 +95,7 @@ typedef struct
     int target_food_id;
 
     coord nm_target_cell_coords;
+    direction nm_direct;
 
     float hunger;
     float die_level_hunger;
