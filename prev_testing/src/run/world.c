@@ -11,7 +11,7 @@ void initialize_world_landscapes(world *wrl)
     landscape_type basic_landscape = {LAND_BASIC, "Basic landscape", true, (Color){3, 130, 0, 225}};
     landscape_type water_landscape = {LAND_WATER, "Water surface", false, (Color){0, 0, 120, 255}};
     landscape_type deep_water_landscape = {LAND_DEEP_WATER, "Deep water", false, (Color){10, 10, 75, 255}};
-    landscape_type mountains_landscape = {LAND_MOUNTAINS, "Mountains and hills", false, (Color){118, 114, 113, 255}};
+    landscape_type mountains_landscape = {LAND_MOUNTAINS, "Mountains and hills", true, (Color){118, 114, 113, 255}};
     landscape_type rock_landscape = {LAND_ROCK, "Hard rock landscape", false, (Color){68, 64, 63, 255}};
 
     wrl->world_landscapes[0] = basic_landscape;

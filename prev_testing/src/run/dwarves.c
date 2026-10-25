@@ -76,25 +76,26 @@ void bypass_obstacle(dwarf *dw, world *wrl)
 {
     if (dw->nm_direct == RIGHT || dw->nm_direct == LEFT)
     {
-        if (!wrl->map[cell_id_in_map(dw->nm_target_cell_coords.x, dw->nm_target_cell_coords.y + 1, wrl->map_size.x)].land_type.can_be_occupied) {
-            dw->nm_direct = DOWN; // <-- This doesn't affect to ...
+        dw->nm_target_cell_coords.x = dw->coords.x;
+        if (wrl->map[cell_id_in_map(dw->coords.x, dw->coords.y + 1, wrl->map_size.x)].land_type.can_be_occupied) {
+            dw->nm_target_cell_coords.y -= 2;
+        } else {
+            dw->nm_target_cell_coords.y += 2;
         }
 
-        dw->nm_target_cell_coords.x = dw->coords.x;
-        dw->nm_target_cell_coords.y = dw->coords.y + 2; // This
     }
     else
     {
-        if (!wrl->map[cell_id_in_map(dw->nm_target_cell_coords.x + 1, dw->nm_target_cell_coords.y, wrl->map_size.x)].land_type.can_be_occupied) {
-            dw->nm_direct = RIGHT;  // <-- This doesn't affect to ...
+        if (wrl->map[cell_id_in_map(dw->coords.x + 1, dw->coords.y, wrl->map_size.x)].land_type.can_be_occupied) {
+            dw->nm_target_cell_coords.x -= 2;
+        } else {
+            dw->nm_target_cell_coords.x += 2;
         }
-
-        dw->nm_target_cell_coords.x = dw->coords.x + 2; // This
         dw->nm_target_cell_coords.y = dw->coords.y;
     } 
 }
 
-void continue_moving_to_target_cell(dwarf *dw, world *wrl)
+void continue_moving_to_target_cell(dwarf *dw, world *wrl, world_params_data_lord *world_params_data)
 {
     if (dw->coords.x < dw->nm_target_cell_coords.x)
     {
@@ -230,7 +231,7 @@ void update_dwarf(world *wrl, coord map_size, dwarf *dw, int timer, world_params
             }
             else if (dw->moving_state == TARGETING) // Go to target
             {
-                continue_moving_to_target_cell(dw, wrl);
+                continue_moving_to_target_cell(dw, wrl, world_params_data);
             }
             else if (dw->moving_state == EATING) // Eating
             {

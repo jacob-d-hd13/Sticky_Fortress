@@ -34,7 +34,7 @@ void generate_structure(world *wrl)
     }
 
     int pond = 0;
-    int pond_step = 100; // If step larger - structure more solid; if less - structure more thin
+    int pond_step = 30; // If step larger - structure more solid; if less - structure more thin
 
     coord size_val = (coord){wrl->map_size.x / 20, wrl->map_size.y / 15};
     coord skeleton_x_size = (coord){size_val.x + rand() % size_val.x, size_val.x + rand() % size_val.x}; // Size borders of structure skeleton

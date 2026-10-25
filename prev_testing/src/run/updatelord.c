@@ -162,7 +162,7 @@ void update_selection(world *wrl, world_params_data_lord *world_params_data, pro
             prog_params_data->square_selecting_freeze = 30;
         }
     }
-    else if (IsMouseButtonDown(MOUSE_RIGHT_BUTTON)) // STUB
+    else if (IsMouseButtonDown(MOUSE_RIGHT_BUTTON))
     {
         if ((prog_params_data->square_selecting_start_cell_coords.x / prog_params_data->rect_size.x) < prog_params_data->window_size.x && (prog_params_data->square_selecting_start_cell_coords.x / prog_params_data->rect_size.x) > 0 && (prog_params_data->square_selecting_start_cell_coords.y / prog_params_data->rect_size.y) < prog_params_data->window_size.y && (prog_params_data->square_selecting_start_cell_coords.y / prog_params_data->rect_size.y) > 0 && wrl->map[cell_id_in_map((prog_params_data->mouse_position.x / prog_params_data->rect_size.x), (prog_params_data->mouse_position.y / prog_params_data->rect_size.y), wrl->map_size.x)].is_selected)
         {
