@@ -9,6 +9,6 @@ void update_game_objects(world *wrl, prog_params_data_lord *prog_params_data, wo
 
 void update_game_stats(world *wrl, world_params_data_lord *world_params_data);
 
-void update_selection(world *wrl, world_params_data_lord *world_params_data, prog_params_data_lord *prog_params_data);
+void update_mouse_press(world *wrl, world_params_data_lord *world_params_data, prog_params_data_lord *prog_params_data, ui_lord *uil);
 
 #endif

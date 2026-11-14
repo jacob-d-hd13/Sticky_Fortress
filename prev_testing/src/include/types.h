@@ -45,22 +45,31 @@ typedef enum
 typedef struct
 {
     coord start_coords;
-
     coord canv_size_coords;
-
     Color background_color;
 } gui_pannel;
 
 typedef struct
 {
     char *text;
-
     coord start_coords;
 
     int font_size;
-
     Color font_color;
 } gui_text;
+
+typedef struct
+{
+    coord start_coords;
+    coord canv_size_coords;
+    Color background_color;
+
+    char *text;
+    int font_size;
+    Color font_color;
+
+    bool is_downed;
+} gui_button;
 
 typedef struct
 {
@@ -145,6 +154,7 @@ typedef struct
 {
     gui_pannel *all_gui_pannels;
     gui_text *all_gui_text;
+    gui_button *all_gui_buttons;
 } ui_lord;
 
 typedef struct
@@ -174,6 +184,8 @@ typedef struct
 
     int timer_reset;
     char *string_current_fps;
+
+    bool is_selecting_mode_on;
 
     bool if_square_selecting_active;
     coord square_selecting_start_cell_coords;

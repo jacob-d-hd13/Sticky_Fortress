@@ -17,6 +17,8 @@ prog_params_data_lord *define_prog_params_data_lord()
 
     prog_params_data->timer_reset = 60;
 
+    prog_params_data->is_selecting_mode_on = false;
+
     prog_params_data->if_square_selecting_active = false;
     prog_params_data->square_selecting_start_cell_coords;
     prog_params_data->square_selecting_end_cell_coords;

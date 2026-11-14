@@ -120,70 +120,91 @@ void update_game_stats(world *wrl, world_params_data_lord *world_params_data)
                 }
             }
         }
-    }    
-    
+    }
+
     for (int x = 0; x < world_params_data->start_dwarves_number; x++)
     {
         if (wrl->dwarves[x].is_alive == true)
         {
-            world_params_data->dwarves_alive ++;
+            world_params_data->dwarves_alive++;
 
-            if (wrl->map[cell_id_in_map(wrl->dwarves[x].coords.x, wrl->dwarves[x].coords.y, wrl->map_size.x)].is_selected == true) {
-                world_params_data->dwarves_selected ++;
+            if (wrl->map[cell_id_in_map(wrl->dwarves[x].coords.x, wrl->dwarves[x].coords.y, wrl->map_size.x)].is_selected == true)
+            {
+                world_params_data->dwarves_selected++;
             }
         }
     }
 }
 
-void update_selection(world *wrl, world_params_data_lord *world_params_data, prog_params_data_lord *prog_params_data)
+void button_press_check(world *wrl, prog_params_data_lord *prog_params_data, ui_lord *uil)
 {
-    if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
+    for (int z = 0; z < 3; z++)
     {
-        if (prog_params_data->square_selecting_freeze == 0)
+        if (prog_params_data->mouse_position.x > uil->all_gui_buttons[z].start_coords.x && prog_params_data->mouse_position.y > uil->all_gui_buttons[z].start_coords.y && prog_params_data->mouse_position.x < uil->all_gui_buttons[z].start_coords.x + uil->all_gui_buttons[z].canv_size_coords.x && prog_params_data->mouse_position.y < uil->all_gui_buttons[z].start_coords.y + uil->all_gui_buttons[z].canv_size_coords.y)
         {
-            prog_params_data->if_square_selecting_active = !prog_params_data->if_square_selecting_active;
+            uil->all_gui_buttons[z].is_downed = !uil->all_gui_buttons[z].is_downed;
+            prog_params_data->if_square_selecting_active = false;
+            prog_params_data->square_selecting_freeze = 30;
+        }
+    }
+}
 
-            if (prog_params_data->if_square_selecting_active)
+void update_mouse_press(world *wrl, world_params_data_lord *world_params_data, prog_params_data_lord *prog_params_data, ui_lord *uil)
+{
+    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+    {
+        button_press_check(wrl, prog_params_data, uil);
+    }
+    
+    if (prog_params_data->is_selecting_mode_on == true)
+    {
+        if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
+        {
+            if (prog_params_data->square_selecting_freeze == 0)
             {
-                prog_params_data->square_selecting_start_cell_coords = prog_params_data->mouse_position;
-                wrl->map[cell_id_in_map((prog_params_data->square_selecting_start_cell_coords.x / prog_params_data->rect_size.x), (prog_params_data->square_selecting_start_cell_coords.y / prog_params_data->rect_size.y), wrl->map_size.x)].is_selected = true;
-            }
-            else
-            {
-                // Select square from (c1.x; c1.y) to (c2.x; c2.y)
-                // Go from selecting start to selecting end
+                prog_params_data->if_square_selecting_active = !prog_params_data->if_square_selecting_active;
 
-                prog_params_data->square_selecting_end_cell_coords.x = (prog_params_data->square_selecting_start_cell_coords.x > prog_params_data->mouse_position.x) ? prog_params_data->square_selecting_start_cell_coords.x : prog_params_data->mouse_position.x;
-                prog_params_data->square_selecting_end_cell_coords.y = (prog_params_data->square_selecting_start_cell_coords.y > prog_params_data->mouse_position.y) ? prog_params_data->square_selecting_start_cell_coords.y : prog_params_data->mouse_position.y;
-
-                prog_params_data->square_selecting_start_cell_coords.x = (prog_params_data->square_selecting_start_cell_coords.x < prog_params_data->mouse_position.x) ? prog_params_data->square_selecting_start_cell_coords.x : prog_params_data->mouse_position.x;
-                prog_params_data->square_selecting_start_cell_coords.y = (prog_params_data->square_selecting_start_cell_coords.y < prog_params_data->mouse_position.y) ? prog_params_data->square_selecting_start_cell_coords.y : prog_params_data->mouse_position.y;
-
-                for (int ab = (prog_params_data->square_selecting_start_cell_coords.x / prog_params_data->rect_size.x); ab < ((prog_params_data->square_selecting_end_cell_coords.x + prog_params_data->rect_size.x - 1) / prog_params_data->rect_size.x); ab++)
+                if (prog_params_data->if_square_selecting_active)
                 {
-                    for (int ord = (prog_params_data->square_selecting_start_cell_coords.y / prog_params_data->rect_size.y); ord < ((prog_params_data->square_selecting_end_cell_coords.y + prog_params_data->rect_size.y - 1) / prog_params_data->rect_size.y); ord++)
+                    prog_params_data->square_selecting_start_cell_coords = prog_params_data->mouse_position;
+                    wrl->map[cell_id_in_map((prog_params_data->square_selecting_start_cell_coords.x / prog_params_data->rect_size.x), (prog_params_data->square_selecting_start_cell_coords.y / prog_params_data->rect_size.y), wrl->map_size.x)].is_selected = true;
+                }
+                else
+                {
+                    // Select square from (c1.x; c1.y) to (c2.x; c2.y)
+                    // Go from selecting start to selecting end
+
+                    prog_params_data->square_selecting_end_cell_coords.x = (prog_params_data->square_selecting_start_cell_coords.x > prog_params_data->mouse_position.x) ? prog_params_data->square_selecting_start_cell_coords.x : prog_params_data->mouse_position.x;
+                    prog_params_data->square_selecting_end_cell_coords.y = (prog_params_data->square_selecting_start_cell_coords.y > prog_params_data->mouse_position.y) ? prog_params_data->square_selecting_start_cell_coords.y : prog_params_data->mouse_position.y;
+
+                    prog_params_data->square_selecting_start_cell_coords.x = (prog_params_data->square_selecting_start_cell_coords.x < prog_params_data->mouse_position.x) ? prog_params_data->square_selecting_start_cell_coords.x : prog_params_data->mouse_position.x;
+                    prog_params_data->square_selecting_start_cell_coords.y = (prog_params_data->square_selecting_start_cell_coords.y < prog_params_data->mouse_position.y) ? prog_params_data->square_selecting_start_cell_coords.y : prog_params_data->mouse_position.y;
+
+                    for (int ab = (prog_params_data->square_selecting_start_cell_coords.x / prog_params_data->rect_size.x); ab < ((prog_params_data->square_selecting_end_cell_coords.x + prog_params_data->rect_size.x - 1) / prog_params_data->rect_size.x); ab++)
                     {
-                        if (wrl->map[cell_id_in_map(ab, ord, wrl->map_size.x)].is_selected == false)
+                        for (int ord = (prog_params_data->square_selecting_start_cell_coords.y / prog_params_data->rect_size.y); ord < ((prog_params_data->square_selecting_end_cell_coords.y + prog_params_data->rect_size.y - 1) / prog_params_data->rect_size.y); ord++)
                         {
                             wrl->map[cell_id_in_map(ab, ord, wrl->map_size.x)].is_selected = true;
                         }
                     }
-                }
-            }
 
-            prog_params_data->square_selecting_freeze = 30;
+                    uil->all_gui_buttons[0].is_downed = false;
+                }
+
+                prog_params_data->square_selecting_freeze = 30;
+            }
         }
-    }
-    else if (IsMouseButtonDown(MOUSE_RIGHT_BUTTON))
-    {
-        if ((prog_params_data->square_selecting_start_cell_coords.x / prog_params_data->rect_size.x) < prog_params_data->window_size.x && (prog_params_data->square_selecting_start_cell_coords.x / prog_params_data->rect_size.x) > 0 && (prog_params_data->square_selecting_start_cell_coords.y / prog_params_data->rect_size.y) < prog_params_data->window_size.y && (prog_params_data->square_selecting_start_cell_coords.y / prog_params_data->rect_size.y) > 0 && wrl->map[cell_id_in_map((prog_params_data->mouse_position.x / prog_params_data->rect_size.x), (prog_params_data->mouse_position.y / prog_params_data->rect_size.y), wrl->map_size.x)].is_selected)
+        else if (IsMouseButtonDown(MOUSE_RIGHT_BUTTON))
         {
-            wrl->map[cell_id_in_map((prog_params_data->mouse_position.x / prog_params_data->rect_size.x), (prog_params_data->mouse_position.y / prog_params_data->rect_size.y), wrl->map_size.x)].is_selected = false;
+            if ((prog_params_data->square_selecting_start_cell_coords.x / prog_params_data->rect_size.x) < prog_params_data->window_size.x && (prog_params_data->square_selecting_start_cell_coords.x / prog_params_data->rect_size.x) > 0 && (prog_params_data->square_selecting_start_cell_coords.y / prog_params_data->rect_size.y) < prog_params_data->window_size.y && (prog_params_data->square_selecting_start_cell_coords.y / prog_params_data->rect_size.y) > 0 && wrl->map[cell_id_in_map((prog_params_data->mouse_position.x / prog_params_data->rect_size.x), (prog_params_data->mouse_position.y / prog_params_data->rect_size.y), wrl->map_size.x)].is_selected)
+            {
+                wrl->map[cell_id_in_map((prog_params_data->mouse_position.x / prog_params_data->rect_size.x), (prog_params_data->mouse_position.y / prog_params_data->rect_size.y), wrl->map_size.x)].is_selected = false;
+            }
         }
-    }
-    else if (IsKeyDown(KEY_ESCAPE))
-    {
-        prog_params_data->if_square_selecting_active = false;
-        deselect_all_world_map(wrl, world_params_data);
+        else if (IsKeyDown(KEY_ESCAPE))
+        {
+            prog_params_data->if_square_selecting_active = false;
+            deselect_all_world_map(wrl, world_params_data);
+        }
     }
 }

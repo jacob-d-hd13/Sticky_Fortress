@@ -94,7 +94,7 @@ int main()
         update_ui_lord(ui_central, world_params_data, prog_params_data, wrl);
         draw_ui_lord(ui_central);
 
-        update_selection(wrl, world_params_data, prog_params_data);
+        update_mouse_press(wrl, world_params_data, prog_params_data, ui_central);
 
         EndDrawing();
     }

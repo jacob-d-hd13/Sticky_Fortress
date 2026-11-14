@@ -17,6 +17,11 @@ void draw_gui_text(gui_text guitx) // Draw text
     DrawText(guitx.text, guitx.start_coords.x, guitx.start_coords.y, guitx.font_size, guitx.font_color);
 }
 
+void draw_gui_button(gui_button guibt) {
+    DrawRectangle(guibt.start_coords.x, guibt.start_coords.y, guibt.canv_size_coords.x, guibt.canv_size_coords.y, guibt.background_color);
+    DrawText(guibt.text, guibt.start_coords.x + 1, guibt.start_coords.y + 1, guibt.font_size, guibt.font_color);
+}
+
 void draw_dwarf(world *wrl, dwarf dw, prog_params_data_lord *prog_params_data) // Draw dwarf(ASCII)
 {
     DrawText(dw.char_value, dw.coords.x * prog_params_data->rect_size.x + 1, dw.coords.y * prog_params_data->rect_size.y - 1, prog_params_data->rect_size.y * 1.3, dw.drawing_color);
