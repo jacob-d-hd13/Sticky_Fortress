@@ -19,7 +19,7 @@ void generate_structure(world *wrl)
     coord rm_borders;
 
     if (rand() % 20 > 11) // Landscapes choice
-    { // Water
+    {                     // Water
         structure.landscape = wrl->world_landscapes[1];
         structure.second_landscape = wrl->world_landscapes[2];
         rm_borders.x = 2;

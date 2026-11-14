@@ -155,7 +155,7 @@ void update_mouse_press(world *wrl, world_params_data_lord *world_params_data, p
     {
         button_press_check(wrl, prog_params_data, uil);
     }
-    
+
     if (prog_params_data->is_selecting_mode_on == true)
     {
         if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))

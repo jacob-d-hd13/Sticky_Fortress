@@ -77,7 +77,8 @@ void update_ui_text(world *wrl, ui_lord *uil, world_params_data_lord *world_para
     sprintf(uil->all_gui_text[2].text, "Dwarves alive: %d / %d", world_params_data->dwarves_alive, world_params_data->start_dwarves_number);
     sprintf(uil->all_gui_text[4].text, "      selected: %d", world_params_data->dwarves_selected);
 
-    if (!uil->all_gui_buttons[2].is_downed) {
+    if (!uil->all_gui_buttons[2].is_downed)
+    {
         for (int x = 0; x < world_params_data->start_dwarves_number; x++)
         {
             if (wrl->dwarves[x].is_alive == true && wrl->map[cell_id_in_map(wrl->dwarves[x].coords.x, wrl->dwarves[x].coords.y, wrl->map_size.x)].is_selected == true)
@@ -128,7 +129,7 @@ void update_ui_buttons(ui_lord *uil, prog_params_data_lord *prog_params_data)
     }
     else
     {
-        sprintf(uil->all_gui_buttons[2].text, "+\n"); 
+        sprintf(uil->all_gui_buttons[2].text, "+\n");
     }
 }
 
