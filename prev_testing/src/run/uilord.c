@@ -26,7 +26,7 @@ ui_lord *initialize_ui_lord(prog_params_data_lord *prog_params_data, int default
 
     gui_text frame_info_text = {.text = (char *)calloc(prog_params_data->text_buffer_size, 1), .start_coords.x = frame_info.start_coords.x + 5, .start_coords.y = frame_info.start_coords.y + 25, .font_size = default_font_size - 5, .font_color = RED};
 
-    gui_text dwarves_selected_list_text = {.text = (char *)calloc(prog_params_data->text_buffer_size, 10), .start_coords.x = dwarves_selected_text.start_coords.x, .start_coords.y = dwarves_selected_text.start_coords.y + 40, .font_size = default_font_size - 20, .font_color = WHITE};
+    gui_text dwarves_selected_list_text = {.text = (char *)calloc(prog_params_data->text_buffer_size, 10), .start_coords.x = dwarves_selected_text.start_coords.x, .start_coords.y = dwarves_selected_text.start_coords.y + 40, .font_size = default_font_size - 13, .font_color = WHITE};
 
     gui_button selecting_mode_switch_button = {.start_coords.x = 200, .start_coords.y = 25, .canv_size_coords.x = 120, .canv_size_coords.y = 20, .background_color = BLUE, .text = (char *)calloc(prog_params_data->text_buffer_size, 1), .font_color = WHITE, .font_size = default_font_size - 5, .is_downed = false};
     gui_button pause_switch_button = {.start_coords.x = frame_info.start_coords.x + 5, .start_coords.y = frame_info.start_coords.y + 75, .canv_size_coords.x = 120, .canv_size_coords.y = 20, .background_color = BLUE, .text = (char *)calloc(prog_params_data->text_buffer_size, 1), .font_color = WHITE, .font_size = default_font_size - 5, .is_downed = false};
