@@ -38,7 +38,8 @@ typedef enum
 {
     UNTARGET_MOVING,
     TARGETING,
-    EATING
+    EATING,
+    DIED
 } dwarf_moving_state;
 
 typedef struct

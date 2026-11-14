@@ -209,9 +209,13 @@ void update_dwarf(world *wrl, coord map_size, dwarf *dw, int timer, world_params
             dw->moving_state = EATING;
         }
 
+        if (dw->is_alive == false) {
+            dw->moving_state = DIED;
+        }
+
         if (timer % 10 == 0) // Moving and eating
         {
-            if (dw->moving_state == UNTARGET_MOVING) // Random moving
+            if (dw->moving_state == UNTARGET_MOVING && rand() % 10 > 4) // Random moving
             {
                 switch (random_for_move)
                 {
@@ -252,7 +256,7 @@ void update_dwarf(world *wrl, coord map_size, dwarf *dw, int timer, world_params
             }
         }
 
-        if (timer % 1 == 0)
+        if (timer % 1 == 0 && dw->is_alive == true)
         {
             dw->hunger += (rand() % 10) / (float)(1 + rand() % 200);
 
@@ -266,17 +270,14 @@ void update_dwarf(world *wrl, coord map_size, dwarf *dw, int timer, world_params
         }
 
         dw->drawing_color = GREEN;
-        world_params_data->dwarves_alive++;
 
         if (wrl->map[cell_id_in_map(dw->coords.x, dw->coords.y, wrl->map_size.x)].is_selected)
         {
             dw->drawing_color = RED;
-            world_params_data->dwarves_selected++;
         }
         else if (!dw->is_alive)
         {
             dw->drawing_color = GRAY;
-            world_params_data->dwarves_alive--;
         }
         else if (dw->moving_state == EATING)
         {

@@ -5,11 +5,11 @@ void draw_gui_pannel(gui_pannel guip) // Draw pannel
 {
     DrawRectangle(guip.start_coords.x, guip.start_coords.y, guip.canv_size_coords.x, guip.canv_size_coords.y, guip.background_color);
 
-    DrawRectangle(guip.start_coords.x + (guip.canv_size_coords.x / 50), (guip.start_coords.y + guip.canv_size_coords.y) - (guip.canv_size_coords.y / 30), guip.canv_size_coords.x - ((guip.canv_size_coords.x / 50) * 2), 1, (Color){255, 255, 255, 120});
-    DrawRectangle(guip.start_coords.x + (guip.canv_size_coords.x / 50), (guip.start_coords.y + guip.canv_size_coords.y) - (guip.canv_size_coords.y / 30) + 2, guip.canv_size_coords.x - ((guip.canv_size_coords.x / 50) * 2), 1, (Color){255, 255, 255, 120});
+    DrawRectangle(guip.start_coords.x + (guip.canv_size_coords.x / 50), (guip.start_coords.y + guip.canv_size_coords.y) - 2, guip.canv_size_coords.x - ((guip.canv_size_coords.x / 50) * 2), 1, (Color){255, 255, 255, 120});
+    DrawRectangle(guip.start_coords.x + (guip.canv_size_coords.x / 50), (guip.start_coords.y + guip.canv_size_coords.y) - 4, guip.canv_size_coords.x - ((guip.canv_size_coords.x / 50) * 2), 1, (Color){255, 255, 255, 120});
 
-    DrawRectangle(guip.start_coords.x + (guip.canv_size_coords.x / 50), guip.start_coords.y + (guip.canv_size_coords.y / 30), guip.canv_size_coords.x - ((guip.canv_size_coords.x / 50) * 2), 1, (Color){255, 255, 255, 120});
-    DrawRectangle(guip.start_coords.x + (guip.canv_size_coords.x / 50), guip.start_coords.y + (guip.canv_size_coords.y / 30) + 2, guip.canv_size_coords.x - ((guip.canv_size_coords.x / 50) * 2), 1, (Color){255, 255, 255, 120});
+    DrawRectangle(guip.start_coords.x + (guip.canv_size_coords.x / 50), guip.start_coords.y + 2, guip.canv_size_coords.x - ((guip.canv_size_coords.x / 50) * 2), 1, (Color){255, 255, 255, 120});
+    DrawRectangle(guip.start_coords.x + (guip.canv_size_coords.x / 50), guip.start_coords.y + 4, guip.canv_size_coords.x - ((guip.canv_size_coords.x / 50) * 2), 1, (Color){255, 255, 255, 120});
 }
 
 void draw_gui_text(gui_text guitx) // Draw text

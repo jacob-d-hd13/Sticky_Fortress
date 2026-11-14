@@ -19,7 +19,7 @@ void generate_structure(world *wrl)
     coord rm_borders;
 
     if (rand() % 20 > 11) // Landscapes choice
-    {                     // Water
+    { // Water
         structure.landscape = wrl->world_landscapes[1];
         structure.second_landscape = wrl->world_landscapes[2];
         rm_borders.x = 2;
@@ -40,7 +40,7 @@ void generate_structure(world *wrl)
     coord skeleton_x_size = (coord){size_val.x + rand() % size_val.x, size_val.x + rand() % size_val.x}; // Size borders of structure skeleton
     coord skeleton_y_size = (coord){size_val.y + rand() % size_val.y, size_val.y + rand() % size_val.y};
 
-    coord zone_center_coord = (coord){skeleton_x_size.x + rand() % (wrl->map_size.x - ((skeleton_x_size.y) * 2)), skeleton_y_size.x + rand() % (wrl->map_size.y - ((skeleton_y_size.y) * 2))}; // Center of structure generation
+    coord zone_center_coord = (coord){skeleton_x_size.x + rand() % (wrl->map_size.x - ((skeleton_x_size.y) * 3)), skeleton_y_size.x + rand() % (wrl->map_size.y - ((skeleton_y_size.y) * 3))}; // Center of structure generation
 
     for (int a = zone_center_coord.x - skeleton_x_size.x; a < zone_center_coord.x + skeleton_x_size.y; a++)
     { // Generation by x

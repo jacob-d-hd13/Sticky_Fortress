@@ -84,14 +84,14 @@ int main()
 
         BeginDrawing();
 
-        ClearBackground(BLACK); // Clear background
+        ClearBackground(BLACK);
 
         update_game_stats(wrl, world_params_data);
         update_game_objects(wrl, prog_params_data, world_params_data, log_data);
 
         draw_world_graphics(wrl, prog_params_data, world_params_data);
 
-        update_ui_lord(ui_central, world_params_data, prog_params_data);
+        update_ui_lord(ui_central, world_params_data, prog_params_data, wrl);
         draw_ui_lord(ui_central);
 
         update_selection(wrl, world_params_data, prog_params_data);

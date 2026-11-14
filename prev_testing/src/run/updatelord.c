@@ -92,7 +92,7 @@ void update_game_stats(world *wrl, world_params_data_lord *world_params_data)
         world_params_data->cells_selected[u] = 0;
     }
 
-    for (int x = 0; x < wrl->map_size.x; x++) // Drawing map
+    for (int x = 0; x < wrl->map_size.x; x++)
     {
         for (int y = 0; y < wrl->map_size.y; y++)
         {
@@ -118,6 +118,18 @@ void update_game_stats(world *wrl, world_params_data_lord *world_params_data)
                 {
                     world_params_data->cells_selected[4]++;
                 }
+            }
+        }
+    }    
+    
+    for (int x = 0; x < world_params_data->start_dwarves_number; x++)
+    {
+        if (wrl->dwarves[x].is_alive == true)
+        {
+            world_params_data->dwarves_alive ++;
+
+            if (wrl->map[cell_id_in_map(wrl->dwarves[x].coords.x, wrl->dwarves[x].coords.y, wrl->map_size.x)].is_selected == true) {
+                world_params_data->dwarves_selected ++;
             }
         }
     }
@@ -171,7 +183,7 @@ void update_selection(world *wrl, world_params_data_lord *world_params_data, pro
     }
     else if (IsKeyDown(KEY_ESCAPE))
     {
-        prog_params_data->if_square_selecting_active = !prog_params_data->if_square_selecting_active;
+        prog_params_data->if_square_selecting_active = false;
         deselect_all_world_map(wrl, world_params_data);
     }
 }
